@@ -1,4 +1,4 @@
--- Aura Store — Seed Data
+-- Fashion Store — Seed Data
 -- Run after schema.sql
 
 INSERT INTO public.products (id, name, brand, category, price, original_price, rating, review_count, badges, in_stock, stock_count, image, description, notes, specs, sku) VALUES

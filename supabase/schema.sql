@@ -1,4 +1,4 @@
--- Aura Store — Supabase Schema
+-- Fashion Store — Supabase Schema
 -- Run this in the Supabase SQL Editor
 
 -- Enable UUID extension
