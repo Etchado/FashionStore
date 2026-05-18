@@ -11,8 +11,8 @@ import { useSEO } from '@/hooks/useSEO'
 import { DROPS } from '@/data/products'
 import { cn } from '@/lib/cn'
 
-const HERO_DAY   = 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=90'
-const HERO_NIGHT = 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=1920&q=90'
+const HERO_DAY   = 'https://images.unsplash.com/photo-1747982719494-af001c94536f?w=1920&q=90'
+const HERO_NIGHT = 'https://images.unsplash.com/photo-1598634222670-87c5f558119c?w=1920&q=90'
 
 function useCountdown(target) {
   const [now, setNow] = useState(Date.now())
