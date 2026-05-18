@@ -12,15 +12,15 @@ import { cn } from '@/lib/cn'
 
 const SLIDES = [
   {
-    src: 'https://images.unsplash.com/photo-1598634222670-87c5f558119c?w=1400&q=90',
+    src: 'https://images.unsplash.com/photo-1611255680915-114e3414c085?w=1400&q=90',
     label: 'Signature Fragrances',
   },
   {
-    src: 'https://images.unsplash.com/photo-1708651145401-6be804cd02d4?w=1400&q=90',
+    src: 'https://images.unsplash.com/photo-1636639818651-d97365346a5c?w=1400&q=90',
     label: 'Iconic Timepieces',
   },
   {
-    src: 'https://images.unsplash.com/photo-1747982719494-af001c94536f?w=1400&q=90',
+    src: 'https://images.unsplash.com/photo-1760858403290-b6ec82b60e2e?w=1400&q=90',
     label: 'Curated Accessories',
   },
 ]
