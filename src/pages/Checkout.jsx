@@ -109,7 +109,10 @@ export default function Checkout() {
 
         if (user) {
           const pts = Math.floor(total / 10)
-          await supabase.from('loyalty_points').upsert({ user_id: user.id, points: pts }, { onConflict: 'user_id' })
+          const { data: existing } = await supabase.from('loyalty_points').select('points').eq('user_id', user.id).single()
+          const newTotal = (existing?.points || 0) + pts
+          await supabase.from('loyalty_points').upsert({ user_id: user.id, points: newTotal, updated_at: new Date().toISOString() }, { onConflict: 'user_id' })
+          await supabase.from('loyalty_history').insert({ user_id: user.id, points: pts, reason: `Order ${num}` })
         }
       }
 

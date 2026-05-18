@@ -4,6 +4,13 @@
 -- Enable UUID extension
 create extension if not exists "uuid-ossp";
 
+-- ─── admin helper ─────────────────────────────────────────────────────────────
+-- Set your admin email here. Used in RLS policies below.
+create or replace function public.is_admin()
+returns boolean language sql stable security definer as $$
+  select coalesce(auth.jwt() ->> 'email', '') = 'ikhaledi95@gmail.com'
+$$;
+
 -- ─── products ────────────────────────────────────────────────────────────────
 create table if not exists public.products (
   id            text primary key,
@@ -27,8 +34,8 @@ create table if not exists public.products (
 );
 alter table public.products enable row level security;
 create policy "Public read products" on public.products for select using (true);
-create policy "Admin insert products" on public.products for insert using (auth.jwt() ->> 'email' = current_setting('app.admin_email', true));
-create policy "Admin update products" on public.products for update using (auth.jwt() ->> 'email' = current_setting('app.admin_email', true));
+create policy "Admin insert products" on public.products for insert with check (public.is_admin());
+create policy "Admin update products" on public.products for update using (public.is_admin());
 
 -- ─── product_variants ─────────────────────────────────────────────────────────
 create table if not exists public.product_variants (
@@ -80,8 +87,8 @@ create table if not exists public.orders (
 alter table public.orders enable row level security;
 create policy "Users read own orders"  on public.orders for select using (auth.uid() = user_id);
 create policy "Users create orders"    on public.orders for insert with check (auth.uid() = user_id or user_id is null);
-create policy "Admin read all orders"  on public.orders for select using (auth.jwt() ->> 'email' = current_setting('app.admin_email', true));
-create policy "Admin update orders"    on public.orders for update using (auth.jwt() ->> 'email' = current_setting('app.admin_email', true));
+create policy "Admin read all orders"  on public.orders for select using (public.is_admin());
+create policy "Admin update orders"    on public.orders for update using (public.is_admin());
 
 -- ─── order_items ─────────────────────────────────────────────────────────────
 create table if not exists public.order_items (

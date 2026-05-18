@@ -19,6 +19,10 @@ export function ProductsProvider({ children }) {
         if (!error && data && data.length > 0) {
           setProducts(data.map(p => ({
             ...p,
+            inStock: p.in_stock,
+            stockCount: p.stock_count,
+            reviewCount: p.review_count,
+            originalPrice: p.original_price,
             variants: p.product_variants || [],
             badges: p.badges || [],
           })))
