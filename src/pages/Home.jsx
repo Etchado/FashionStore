@@ -11,18 +11,11 @@ import { DROPS } from '@/data/products'
 import { cn } from '@/lib/cn'
 
 const SLIDES = [
-  {
-    src: 'https://images.unsplash.com/photo-1611255680915-114e3414c085?w=1400&q=90',
-    label: 'Signature Fragrances',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1636639818651-d97365346a5c?w=1400&q=90',
-    label: 'Iconic Timepieces',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1760858403290-b6ec82b60e2e?w=1400&q=90',
-    label: 'Curated Accessories',
-  },
+  { src: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1400&q=90', label: 'Signature Fragrances' },
+  { src: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1400&q=90', label: 'Iconic Timepieces' },
+  { src: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=1400&q=90', label: 'Luxury Eyewear' },
+  { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1400&q=90', label: 'Fine Jewellery' },
+  { src: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=90', label: 'Designer Bags' },
 ]
 
 const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
@@ -154,62 +147,63 @@ export default function Home() {
     <div className="overflow-x-hidden">
 
       {/* ── HERO ── */}
-      <section className="relative h-screen min-h-[640px] overflow-hidden">
+      <section className="relative bg-stone-950 dark:bg-black overflow-hidden flex flex-col md:block md:h-screen md:min-h-[640px]">
 
-        {/* Right side: auto-cycling product images */}
-        <div className="absolute inset-0">
+        {/* ── RIGHT: cycling images — top on mobile, right half on desktop ── */}
+        <div className="relative h-64 flex-shrink-0 overflow-hidden md:absolute md:h-auto md:top-0 md:bottom-0 md:right-0 md:left-[44%]">
           <AnimatePresence mode="sync">
             <motion.img
               key={slide}
               src={SLIDES[slide].src}
               alt={SLIDES[slide].label}
               className="absolute inset-0 w-full h-full object-cover object-center"
-              initial={{ opacity: 0, scale: 1.04 }}
+              initial={{ opacity: 0, scale: 1.06 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: 'easeInOut' }}
+              transition={{ duration: 1.3, ease: 'easeInOut' }}
               onError={e => { e.target.src = 'https://placehold.co/1400x900/1c1917/c8861e?text=FASHION' }}
             />
           </AnimatePresence>
-          {/* subtle right-side darkening so image doesn't bleed too bright */}
-          <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-transparent to-transparent" />
+          {/* Mobile: bottom fade into dark panel */}
+          <div className="md:hidden absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-stone-950 to-transparent pointer-events-none" />
+          {/* Desktop: left-edge gradient blending into diagonal cut */}
+          <div className="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-stone-950 dark:from-black to-transparent pointer-events-none z-10" />
         </div>
 
-        {/* Dark left panel with diagonal cut */}
+        {/* ── LEFT: solid dark panel — below on mobile, left on desktop ── */}
         <div
-          className="absolute inset-y-0 left-0 z-10 bg-stone-950 dark:bg-black flex items-center"
-          style={{ width: '56%', clipPath: 'polygon(0 0, 100% 0, 88% 100%, 0 100%)' }}
+          className="relative flex-1 flex items-center bg-stone-950 dark:bg-black z-10 md:absolute md:top-0 md:bottom-0 md:left-0 md:w-[52%] md:[clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]"
         >
-          {/* Halftone gold dots — far left */}
+          {/* Halftone gold dots — far left, desktop only */}
           <div
-            className="absolute left-0 inset-y-0 w-28 opacity-[0.12] pointer-events-none"
+            className="hidden md:block absolute left-0 inset-y-0 w-28 opacity-[0.12] pointer-events-none"
             style={{
               backgroundImage: 'radial-gradient(circle, #c8861e 1.5px, transparent 1.5px)',
               backgroundSize: '13px 13px',
             }}
           />
 
-          {/* Gold dot scatter — decorative */}
+          {/* Scattered gold dots */}
           {[
-            { top: '22%', left: '62%' }, { top: '68%', left: '58%' },
-            { top: '38%', left: '70%' }, { top: '80%', left: '66%' },
-            { top: '14%', left: '74%' }, { top: '55%', left: '76%' },
+            { top: '20%', left: '65%' }, { top: '65%', left: '60%' },
+            { top: '40%', left: '72%' }, { top: '78%', left: '68%' },
+            { top: '12%', left: '75%' },
           ].map((pos, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 rounded-full bg-brand-400 opacity-40 pointer-events-none"
+              className="hidden md:block absolute w-1 h-1 rounded-full bg-brand-400 opacity-35 pointer-events-none"
               style={pos}
             />
           ))}
 
           {/* Content */}
-          <div className="relative z-10 px-10 md:px-16 lg:px-24 w-full max-w-xl">
-            {/* Season label */}
+          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:px-10 lg:px-16 xl:px-24 max-w-lg">
+
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="flex items-center gap-3 mb-7"
+              className="flex items-center gap-3 mb-6"
             >
               <div className="w-7 h-px bg-brand-400" />
               <span className="text-[9px] font-body uppercase tracking-[0.35em] text-brand-400/70">
@@ -217,14 +211,13 @@ export default function Home() {
               </span>
             </motion.div>
 
-            {/* Gold metallic headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="font-serif font-light leading-[1.05] mb-4"
               style={{
-                fontSize: 'clamp(2.6rem, 4.5vw, 5rem)',
+                fontSize: 'clamp(2.8rem, 4.5vw, 5rem)',
                 background: GOLD,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -236,7 +229,6 @@ export default function Home() {
               Elegance
             </motion.h1>
 
-            {/* Gold ornamental divider */}
             <motion.div
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
@@ -249,17 +241,16 @@ export default function Home() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.65 }}
-              className="font-body text-white/45 text-sm leading-relaxed mb-10 max-w-[260px]"
+              className="font-body text-white/40 text-sm leading-relaxed mb-10 max-w-[280px]"
             >
               {t('home.hero.subtitle')}
             </motion.p>
 
-            {/* CTA */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8 }}
             >
@@ -271,12 +262,11 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 1 }}
-              className="flex gap-8 mt-12 pt-8 border-t border-white/8"
+              className="flex gap-8 mt-12 pt-8 border-t border-white/[0.07]"
             >
               {[
                 { num: '500+', label: 'Exclusive Pieces' },
@@ -284,10 +274,7 @@ export default function Home() {
                 { num: '2024', label: 'Est.' },
               ].map(stat => (
                 <div key={stat.label}>
-                  <p
-                    className="font-serif text-xl"
-                    style={{ background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
-                  >
+                  <p className="font-serif text-xl" style={{ background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     {stat.num}
                   </p>
                   <p className="text-[9px] font-body uppercase tracking-wider text-white/30 mt-0.5">{stat.label}</p>
@@ -297,80 +284,51 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Gold diagonal lines — at the panel cut */}
-        <div
-          className="absolute inset-y-0 z-20 pointer-events-none"
-          style={{ left: 'calc(56% - 70px)', width: '140px' }}
-        >
-          {/* Main gold vertical bar */}
-          <div
-            className="absolute inset-y-0 opacity-70"
-            style={{
-              left: '50%',
-              width: '2px',
-              background: 'linear-gradient(to bottom, transparent 0%, #c8861e 20%, #ecc46e 50%, #c8861e 80%, transparent 100%)',
-              transform: 'rotate(-8deg) translateX(-50%)',
-              transformOrigin: 'center',
-            }}
-          />
-          {/* Thinner parallel lines */}
-          {[10, 20, 32, 44].map((offset, i) => (
-            <div
-              key={offset}
-              className="absolute inset-y-0"
-              style={{
-                left: `calc(50% + ${offset}px)`,
-                width: '1px',
-                background: 'linear-gradient(to bottom, transparent 0%, #c8861e 30%, #c8861e 70%, transparent 100%)',
-                opacity: 0.18 - i * 0.03,
-                transform: 'rotate(-8deg)',
-                transformOrigin: 'center',
-              }}
-            />
+        {/* ── Gold stripe at diagonal edge — desktop only ── */}
+        <div className="hidden md:block absolute inset-y-0 z-20 pointer-events-none" style={{ left: 'calc(52% - 55px)', width: '110px' }}>
+          <div className="absolute inset-y-0 opacity-65" style={{ left: '50%', width: '2px', background: 'linear-gradient(to bottom, transparent, #c8861e 25%, #ecc46e 50%, #c8861e 75%, transparent)', transform: 'rotate(-7deg) translateX(-50%)' }} />
+          {[10, 20, 30, 42].map((o, i) => (
+            <div key={o} className="absolute inset-y-0" style={{ left: `calc(50% + ${o}px)`, width: '1px', background: 'linear-gradient(to bottom, transparent, #c8861e 30%, #c8861e 70%, transparent)', opacity: 0.15 - i * 0.025, transform: 'rotate(-7deg)' }} />
           ))}
-          {/* Short gold dashes (like the reference) */}
-          {[0, 30, 60, 90, 120, 150, 180].map(top => (
-            <div
-              key={top}
-              className="absolute bg-brand-400"
-              style={{
-                top: `${top}px`,
-                left: '30%',
-                width: '3px',
-                height: '12px',
-                opacity: 0.5,
-                transform: 'rotate(-8deg)',
-              }}
-            />
+          {[20, 55, 90, 130, 170, 210, 255].map(top => (
+            <div key={top} className="absolute bg-brand-400" style={{ top, left: '28%', width: '3px', height: '11px', opacity: 0.45, transform: 'rotate(-7deg)' }} />
           ))}
         </div>
 
-        {/* Slide label + dots bottom-right */}
-        <div className="absolute bottom-8 right-8 z-30 flex flex-col items-end gap-3">
+        {/* ── Slide indicators — desktop bottom-right ── */}
+        <div className="hidden md:flex absolute bottom-8 right-8 z-30 flex-col items-end gap-3">
           <AnimatePresence mode="wait">
             <motion.span
               key={slide}
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4 }}
-              className="text-[9px] font-body uppercase tracking-[0.25em] text-white/40"
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.35 }}
+              className="text-[9px] font-body uppercase tracking-[0.25em] text-white/35"
             >
               {SLIDES[slide].label}
             </motion.span>
           </AnimatePresence>
-          <div className="flex gap-1.5">
+          <div className="flex gap-1.5 items-center">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setSlide(i)}
-                className={cn(
-                  'h-px transition-all duration-500 bg-brand-400',
-                  i === slide ? 'w-8 opacity-100' : 'w-3 opacity-30'
-                )}
+                className={cn('h-px bg-brand-400 transition-all duration-500', i === slide ? 'w-8 opacity-100' : 'w-2.5 opacity-25')}
               />
             ))}
           </div>
+        </div>
+
+        {/* ── Mobile slide dots ── */}
+        <div className="md:hidden flex justify-center gap-1.5 py-4 bg-stone-950 dark:bg-black">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setSlide(i)}
+              className={cn('h-px bg-brand-400 transition-all duration-500', i === slide ? 'w-6 opacity-100' : 'w-2 opacity-25')}
+            />
+          ))}
         </div>
       </section>
 
