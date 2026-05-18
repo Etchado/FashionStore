@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 font-sans antialiased;
+    margin: 0;
+  }
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+  * {
+    transition-property: background-color, border-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+  }
+}

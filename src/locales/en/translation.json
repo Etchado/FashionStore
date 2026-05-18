@@ -1,0 +1,335 @@
+{
+  "site": {
+    "name": "Aura Store",
+    "tagline": "Luxury Perfumes, Watches & Accessories",
+    "currency": "Currency"
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "perfumes": "Perfumes",
+    "watches": "Watches",
+    "accessories": "Accessories",
+    "brands": "Brands",
+    "newArrivals": "New Arrivals",
+    "sale": "Sale",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "account": "Account",
+    "admin": "Admin",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "search": "Search products...",
+    "searchMin": "Type at least 2 characters",
+    "noResults": "No products found",
+    "builder": "Fragrance Builder"
+  },
+  "announcement": {
+    "msg1": "Free shipping on orders over $150",
+    "msg2": "New arrivals every Friday — stay tuned",
+    "msg3": "Exclusive members get 10% off first order",
+    "msg4": "Authentic luxury. Guaranteed."
+  },
+  "home": {
+    "hero": {
+      "title": "Scent the Extraordinary",
+      "subtitle": "Curated luxury perfumes, iconic watches, and timeless accessories.",
+      "cta": "Explore Collection",
+      "ctaSecondary": "View New Arrivals"
+    },
+    "featured": "Featured Products",
+    "newArrivals": "New Arrivals",
+    "bestsellers": "Bestsellers",
+    "categories": "Shop by Category",
+    "brandsTitle": "Our Brands",
+    "drops": "Exclusive Drops",
+    "builderPromo": {
+      "title": "Build Your Signature",
+      "subtitle": "Mix and match fragrances, watches, and accessories to craft your perfect luxury set.",
+      "cta": "Start Building"
+    }
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "quickView": "Quick View",
+    "compare": "Compare",
+    "removeCompare": "Remove from Compare",
+    "outOfStock": "Out of Stock",
+    "notifyMe": "Notify Me",
+    "notifySuccess": "We'll notify you when this is back in stock.",
+    "size": "Size",
+    "color": "Color",
+    "strap": "Strap",
+    "quantity": "Quantity",
+    "inStock": "In Stock",
+    "lowStock": "Only {{count}} left",
+    "sku": "SKU",
+    "brand": "Brand",
+    "category": "Category",
+    "description": "Description",
+    "details": "Details",
+    "shipping": "Shipping & Returns",
+    "reviews": "Reviews",
+    "writeReview": "Write a Review",
+    "noReviews": "No reviews yet. Be the first!",
+    "avgRating": "Average Rating",
+    "badges": {
+      "new": "New",
+      "sale": "Sale",
+      "bestseller": "Bestseller",
+      "exclusive": "Exclusive"
+    },
+    "filters": {
+      "title": "Filters",
+      "clear": "Clear All",
+      "category": "Category",
+      "brand": "Brand",
+      "price": "Price Range",
+      "rating": "Rating",
+      "availability": "Availability",
+      "inStockOnly": "In Stock Only",
+      "apply": "Apply Filters"
+    },
+    "sort": {
+      "label": "Sort By",
+      "featured": "Featured",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "topRated": "Top Rated",
+      "deals": "Best Deals",
+      "newest": "Newest First"
+    },
+    "compare": {
+      "title": "Compare Products",
+      "add": "Add to Compare",
+      "max": "You can compare up to 3 products",
+      "clear": "Clear All",
+      "compare": "Compare Now",
+      "empty": "No products to compare",
+      "specs": "Specifications"
+    },
+    "emptyState": {
+      "title": "No products found",
+      "subtitle": "Try adjusting your filters or search query.",
+      "cta": "Clear Filters"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "emptySubtitle": "Start adding some luxury items.",
+    "shopNow": "Shop Now",
+    "item": "item",
+    "items": "items",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping",
+    "remove": "Remove",
+    "freeShipping": "Free Shipping",
+    "freeShippingNote": "You qualify for free shipping!"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "steps": {
+      "cart": "Cart Review",
+      "shipping": "Shipping",
+      "payment": "Payment"
+    },
+    "shipping": {
+      "title": "Shipping Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "address": "Street Address",
+      "city": "City",
+      "state": "State / Province",
+      "zip": "ZIP / Postal Code",
+      "country": "Country",
+      "continue": "Continue to Payment"
+    },
+    "payment": {
+      "title": "Payment",
+      "note": "This is a demo store. No real payment is processed.",
+      "placeOrder": "Place Order",
+      "orderNumber": "Order Number"
+    },
+    "success": {
+      "title": "Order Placed!",
+      "subtitle": "Thank you for your purchase. Your order #{{number}} has been confirmed.",
+      "viewOrders": "View My Orders",
+      "continueShopping": "Continue Shopping"
+    }
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "orContinueWith": "Or continue with",
+    "google": "Continue with Google",
+    "signInSuccess": "Welcome back!",
+    "signUpSuccess": "Account created successfully!",
+    "signOutSuccess": "Signed out successfully.",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 6 characters",
+      "passwordMatch": "Passwords do not match",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "empty": "Your wishlist is empty",
+    "emptySubtitle": "Save items you love to find them later.",
+    "addedToast": "Added to wishlist",
+    "removedToast": "Removed from wishlist"
+  },
+  "account": {
+    "title": "My Account",
+    "welcome": "Welcome, {{name}}",
+    "orders": "My Orders",
+    "loyalty": "Loyalty Points",
+    "profile": "Profile",
+    "noOrders": "You haven't placed any orders yet.",
+    "orderNumber": "Order #{{number}}",
+    "orderDate": "Placed on {{date}}",
+    "orderStatus": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "loyalty": {
+      "points": "{{points}} pts",
+      "tier": "Tier: {{tier}}",
+      "bronze": "Bronze",
+      "silver": "Silver",
+      "gold": "Gold",
+      "platinum": "Platinum",
+      "earnMore": "Earn more points by shopping"
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "orders": "All Orders",
+    "updateStatus": "Update Status",
+    "orderItems": "Order Items",
+    "customer": "Customer",
+    "total": "Total",
+    "status": "Status",
+    "date": "Date",
+    "noOrders": "No orders yet."
+  },
+  "builder": {
+    "title": "Fragrance & Watch Builder",
+    "subtitle": "Craft your perfect luxury set. Mix fragrances, timepieces, and accessories.",
+    "steps": {
+      "fragrance": "Choose Fragrance",
+      "watch": "Choose Watch",
+      "accessory": "Choose Accessory"
+    },
+    "running": "Running Total",
+    "addAllToCart": "Add Bundle to Cart",
+    "clear": "Start Over",
+    "selectItem": "Select an item to add",
+    "bundleSaved": "Bundle added to cart!"
+  },
+  "drops": {
+    "title": "Exclusive Drops",
+    "subtitle": "Limited edition releases. First come, first served.",
+    "live": "Live Now",
+    "upcoming": "Upcoming",
+    "ended": "Ended",
+    "endsIn": "Ends in",
+    "startsIn": "Starts in",
+    "claimed": "{{pct}}% Claimed",
+    "enterRaffle": "Enter Raffle",
+    "raffleSuccess": "You're in the raffle!",
+    "alreadyEntered": "Already entered"
+  },
+  "toast": {
+    "addedToCart": "Added to cart",
+    "removedFromCart": "Removed from cart",
+    "cartUpdated": "Cart updated",
+    "error": "Something went wrong",
+    "copiedLink": "Link copied!",
+    "notifySet": "We'll notify you when back in stock"
+  },
+  "cookie": {
+    "title": "Cookie Preferences",
+    "message": "We use cookies to enhance your experience, analyze site traffic, and personalize content.",
+    "acceptAll": "Accept All",
+    "essentialOnly": "Essential Only",
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "brand": {
+      "desc": "Your destination for authentic luxury perfumes, iconic watches, and premium accessories."
+    },
+    "shop": {
+      "title": "Shop",
+      "perfumes": "Perfumes",
+      "watches": "Watches",
+      "accessories": "Accessories",
+      "newArrivals": "New Arrivals",
+      "sale": "Sale"
+    },
+    "support": {
+      "title": "Support",
+      "faq": "FAQ",
+      "shipping": "Shipping Info",
+      "returns": "Returns",
+      "contact": "Contact Us",
+      "track": "Track Order"
+    },
+    "newsletter": {
+      "title": "Stay in the Loop",
+      "subtitle": "New drops, exclusive offers, and style inspiration.",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe",
+      "success": "You're subscribed!"
+    },
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "viewAll": "View All",
+    "seeMore": "See More",
+    "backToTop": "Back to Top",
+    "whatsapp": "Chat on WhatsApp",
+    "shareProduct": "Share",
+    "from": "From",
+    "price": "Price",
+    "off": "OFF",
+    "page": "Page",
+    "of": "of",
+    "next": "Next",
+    "prev": "Previous",
+    "notFound": "Page Not Found",
+    "notFoundSub": "The page you're looking for doesn't exist.",
+    "goHome": "Go Home"
+  }
+}
