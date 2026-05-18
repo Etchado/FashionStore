@@ -95,38 +95,90 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative h-[85vh] min-h-[500px] overflow-hidden flex items-center">
+      <section className="relative h-screen min-h-[640px] overflow-hidden flex items-center justify-center">
+        {/* Background image */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=1600&q=90"
-            alt="Hero"
-            className="w-full h-full object-cover"
-            onError={e => { e.target.src = 'https://placehold.co/1600x900/1c1917/a8a29e?text=FASHION+STORE' }}
+            src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1920&q=90"
+            alt="Luxury flat lay"
+            className="w-full h-full object-cover scale-105"
+            style={{ transformOrigin: 'center 40%' }}
+            onError={e => { e.target.src = 'https://placehold.co/1920x1080/1c1917/a8a29e?text=FASHION+STORE' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-e from-stone-950/80 via-stone-950/40 to-transparent" />
+          {/* Multi-layer overlay for cinematic depth */}
+          <div className="absolute inset-0 bg-stone-950/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-stone-950/20" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+
+        {/* Centered content */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="max-w-xl"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-body text-[10px] uppercase tracking-[0.35em] text-brand-300 mb-6"
           >
-            <p className="font-body text-xs uppercase tracking-[0.2em] text-brand-300 mb-4">{t('site.tagline')}</p>
-            <h1 className="font-serif text-5xl md:text-7xl font-semibold text-white leading-tight mb-6">
-              {t('home.hero.title')}
-            </h1>
-            <p className="font-body text-stone-300 text-lg mb-8 leading-relaxed">{t('home.hero.subtitle')}</p>
-            <div className="flex items-center gap-4">
-              <Link to="/shop">
-                <Button size="lg">{t('home.hero.cta')}</Button>
-              </Link>
-              <Link to="/shop?sort=newest" className="flex items-center gap-2 font-body text-stone-200 hover:text-white transition-colors text-sm">
-                {t('home.hero.ctaSecondary')} <ArrowRight size={16} />
-              </Link>
-            </div>
+            {t('site.tagline')}
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white leading-[1.05] tracking-tight mb-6"
+          >
+            {t('home.hero.title')}
+          </motion.h1>
+
+          {/* Thin gold rule */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="w-20 h-px bg-brand-400 mx-auto mb-6"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="font-body text-stone-300/90 text-base md:text-lg leading-relaxed max-w-md mx-auto mb-10"
+          >
+            {t('home.hero.subtitle')}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.85 }}
+            className="flex items-center justify-center gap-6 flex-wrap"
+          >
+            <Link to="/shop">
+              <Button size="lg">{t('home.hero.cta')}</Button>
+            </Link>
+            <Link
+              to="/shop?sort=newest"
+              className="flex items-center gap-2 font-body text-stone-200 hover:text-brand-300 transition-colors text-sm tracking-wide"
+            >
+              {t('home.hero.ctaSecondary')} <ArrowRight size={15} />
+            </Link>
           </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        >
+          <span className="font-body text-[9px] uppercase tracking-[0.25em] text-stone-400">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            className="w-px h-8 bg-gradient-to-b from-stone-400 to-transparent"
+          />
+        </motion.div>
       </section>
 
       {/* Categories */}
