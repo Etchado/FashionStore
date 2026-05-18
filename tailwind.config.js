@@ -26,6 +26,7 @@ export default {
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans:  ['Inter', 'system-ui', 'sans-serif'],
+        body:  ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         shimmer: 'shimmer 1.5s infinite',
