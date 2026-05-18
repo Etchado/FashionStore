@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 export function useSEO({ title, description, image, url } = {}) {
   useEffect(() => {
-    const siteName = 'Aura Store'
+    const siteName = 'Fashion Store'
     const fullTitle = title ? `${title} — ${siteName}` : siteName
 
     document.title = fullTitle

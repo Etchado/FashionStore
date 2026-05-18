@@ -56,7 +56,7 @@ export function ProductCard({ product, index = 0, onQuickView }) {
         {/* Image container */}
         <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-stone-100 dark:bg-stone-800">
           <img
-            src={imgError ? 'https://placehold.co/400x533/e7e5e4/78716c?text=AURA' : product.image}
+            src={imgError ? 'https://placehold.co/400x533/e7e5e4/78716c?text=FASHION' : product.image}
             alt={product.name}
             loading="lazy"
             onError={() => setImgError(true)}

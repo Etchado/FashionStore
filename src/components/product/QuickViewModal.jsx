@@ -38,7 +38,7 @@ export function QuickViewModal({ product, onClose }) {
         {/* Image */}
         <div className="aspect-square sm:aspect-auto sm:h-full bg-stone-100 dark:bg-stone-800 rounded-s-2xl overflow-hidden">
           <img
-            src={imgError ? 'https://placehold.co/400x400/e7e5e4/78716c?text=AURA' : product.image}
+            src={imgError ? 'https://placehold.co/400x400/e7e5e4/78716c?text=FASHION' : product.image}
             alt={product.name}
             className="w-full h-full object-cover"
             onError={() => setImgError(true)}

@@ -33,7 +33,7 @@ function DropCard({ drop }) {
 
   return (
     <div className="relative rounded-2xl overflow-hidden bg-stone-900 text-white group">
-      <img src={drop.image} alt={drop.name} loading="lazy" className="w-full h-56 object-cover opacity-60 group-hover:opacity-70 transition-opacity" onError={e => { e.target.src = 'https://placehold.co/800x224/292524/a8a29e?text=AURA' }} />
+      <img src={drop.image} alt={drop.name} loading="lazy" className="w-full h-56 object-cover opacity-60 group-hover:opacity-70 transition-opacity" onError={e => { e.target.src = 'https://placehold.co/800x224/292524/a8a29e?text=FASHION' }} />
       <div className="absolute inset-0 flex flex-col justify-end p-5">
         <div className="flex items-center gap-2 mb-2">
           <span className={cn('text-xs font-body font-semibold px-2 py-0.5 rounded-full', drop.status === 'live' ? 'bg-red-500' : drop.status === 'upcoming' ? 'bg-brand-500' : 'bg-stone-600')}>
@@ -80,7 +80,7 @@ export default function Home() {
 
   useSEO({
     title: 'Luxury Perfumes, Watches & Accessories',
-    description: 'Discover authentic luxury fragrances, iconic watches, and premium accessories at Aura Store.',
+    description: 'Discover authentic luxury fragrances, iconic watches, and premium accessories at Fashion Store.',
   })
 
   const featured = useMemo(() => products.filter(p => p.badges?.includes('BESTSELLER')).slice(0, 6), [products])
@@ -101,7 +101,7 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=1600&q=90"
             alt="Hero"
             className="w-full h-full object-cover"
-            onError={e => { e.target.src = 'https://placehold.co/1600x900/1c1917/a8a29e?text=AURA+STORE' }}
+            onError={e => { e.target.src = 'https://placehold.co/1600x900/1c1917/a8a29e?text=FASHION+STORE' }}
           />
           <div className="absolute inset-0 bg-gradient-to-e from-stone-950/80 via-stone-950/40 to-transparent" />
         </div>
@@ -201,7 +201,7 @@ export default function Home() {
               'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=400&q=80',
             ].map((src, i) => (
               <div key={i} className={cn('rounded-2xl overflow-hidden aspect-square', i === 1 && 'mt-8')}>
-                <img src={src} alt="" className="w-full h-full object-cover opacity-80" onError={e => { e.target.src = 'https://placehold.co/400x400/292524/a8a29e?text=AURA' }} />
+                <img src={src} alt="" className="w-full h-full object-cover opacity-80" onError={e => { e.target.src = 'https://placehold.co/400x400/292524/a8a29e?text=FASHION' }} />
               </div>
             ))}
           </motion.div>

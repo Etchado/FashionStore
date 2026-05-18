@@ -19,7 +19,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <span className="font-serif text-2xl font-semibold text-white">AURA<span className="text-brand-400">.</span></span>
+            <span className="font-serif text-2xl font-semibold text-white">FASHION<span className="text-brand-400">.</span></span>
             <p className="mt-4 text-sm font-body text-stone-400 leading-relaxed">{t('footer.brand.desc')}</p>
             <div className="flex items-center gap-4 mt-6">
               <a href="#" aria-label="Instagram" className="text-stone-400 hover:text-brand-400 transition-colors">
@@ -94,7 +94,7 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-body text-stone-500">
-            © {new Date().getFullYear()} Aura Store. {t('footer.rights')}
+            © {new Date().getFullYear()} Fashion Store. {t('footer.rights')}
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-xs font-body text-stone-500 hover:text-stone-300 transition-colors">{t('footer.privacy')}</a>

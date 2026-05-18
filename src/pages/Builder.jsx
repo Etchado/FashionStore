@@ -35,7 +35,7 @@ function BuilderCard({ product, selected, onSelect, format }) {
     >
       <div className="aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-800">
         <img
-          src={imgError ? 'https://placehold.co/300x400/e7e5e4/78716c?text=AURA' : product.image}
+          src={imgError ? 'https://placehold.co/300x400/e7e5e4/78716c?text=FASHION' : product.image}
           alt={product.name}
           loading="lazy"
           onError={() => setImgError(true)}

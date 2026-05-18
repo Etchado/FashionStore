@@ -100,7 +100,7 @@ export function Navbar({ onAuthOpen }) {
         {/* Logo */}
         <Link to="/" className="flex-shrink-0" onClick={() => window.scrollTo(0, 0)}>
           <span className="font-serif text-xl font-semibold text-stone-900 dark:text-stone-100 tracking-tight">
-            AURA<span className="text-brand-500">.</span>
+            FASHION<span className="text-brand-500">.</span>
           </span>
         </Link>
 

@@ -115,7 +115,7 @@ export default function ProductDetail() {
               key={mainImg}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              src={imgError ? 'https://placehold.co/600x600/e7e5e4/78716c?text=AURA' : (mainImg || product.image)}
+              src={imgError ? 'https://placehold.co/600x600/e7e5e4/78716c?text=FASHION' : (mainImg || product.image)}
               alt={product.name}
               className="w-full h-full object-cover"
               onError={() => setImgError(true)}

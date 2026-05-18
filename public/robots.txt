@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /account
 Disallow: /checkout
 
-Sitemap: https://aura-store.vercel.app/sitemap.xml
+Sitemap: https://fashion-store.vercel.app/sitemap.xml
