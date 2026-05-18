@@ -5,10 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Zap, Star, Shield, Gem } from 'lucide-react'
 import { useProducts } from '@/context/ProductsContext'
 import { useCurrency } from '@/context/CurrencyContext'
+import { useTheme } from '@/context/ThemeContext'
 import { BrandsMarquee } from '@/components/common/BrandsMarquee'
 import { useSEO } from '@/hooks/useSEO'
 import { DROPS } from '@/data/products'
 import { cn } from '@/lib/cn'
+
+const HERO_DAY   = 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=90'
+const HERO_NIGHT = 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=1920&q=90'
 
 function useCountdown(target) {
   const [now, setNow] = useState(Date.now())
@@ -40,7 +44,7 @@ function DropCard({ drop }) {
         <div className="flex items-center gap-2 mb-3">
           <span className={cn(
             'text-[9px] font-body font-semibold uppercase tracking-[0.2em] px-2.5 py-1',
-            drop.status === 'live' ? 'bg-red-500 text-white' : drop.status === 'upcoming' ? 'bg-brand-400 text-white' : 'bg-stone-600 text-stone-300'
+            drop.status === 'live' ? 'bg-stone-900 text-white' : drop.status === 'upcoming' ? 'bg-brand-400 text-white' : 'bg-stone-700 text-stone-300'
           )}>
             {drop.status === 'live'
               ? <span className="flex items-center gap-1"><Zap size={9} /> {t('drops.live')}</span>
@@ -95,6 +99,8 @@ export default function Home() {
   const { t } = useTranslation()
   const { products, loading } = useProducts()
   const { format } = useCurrency()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   useSEO({
     title: 'Luxury Perfumes, Watches & Accessories',
@@ -133,13 +139,26 @@ export default function Home() {
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[680px] overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1920&q=90"
-            alt="Luxury flat lay"
+          <motion.img
+            key={isDark ? 'night' : 'day'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
+            src={isDark ? HERO_NIGHT : HERO_DAY}
+            alt={isDark ? 'Desert at night' : 'Desert at dawn'}
             className="w-full h-full object-cover"
-            onError={e => { e.target.src = 'https://placehold.co/1920x1080/1c1917/a8a29e?text=FASHION+STORE' }}
+            onError={e => {
+              e.target.src = isDark
+                ? 'https://placehold.co/1920x1080/0c0a09/c8861e?text=FASHION+STORE'
+                : 'https://placehold.co/1920x1080/c8861e/1c1917?text=FASHION+STORE'
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
+          <div className={cn(
+            'absolute inset-0 bg-gradient-to-t',
+            isDark
+              ? 'from-black/85 via-black/40 to-black/20'
+              : 'from-stone-950/70 via-stone-950/20 to-stone-950/5'
+          )} />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-8 pb-20 md:pb-28">

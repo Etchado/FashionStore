@@ -1,10 +1,10 @@
 import { cn } from '@/lib/cn'
 
 const styles = {
-  NEW:        'bg-emerald-500 text-white',
-  SALE:       'bg-red-500 text-white',
+  NEW:        'bg-brand-400 text-white',
+  SALE:       'bg-stone-900 dark:bg-white text-white dark:text-stone-900',
   BESTSELLER: 'bg-brand-500 text-white',
-  EXCLUSIVE:  'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900',
+  EXCLUSIVE:  'bg-stone-900 dark:bg-white text-white dark:text-stone-900',
 }
 
 export function Badge({ type, className }) {
