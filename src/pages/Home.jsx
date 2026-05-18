@@ -147,7 +147,7 @@ export default function Home() {
     <div className="overflow-x-hidden">
 
       {/* ── HERO ── */}
-      <section className="relative bg-stone-950 dark:bg-black overflow-hidden flex flex-col md:block md:h-screen md:min-h-[640px]">
+      <section dir="ltr" className="relative bg-stone-950 dark:bg-black overflow-hidden flex flex-col md:block md:h-screen md:min-h-[640px]">
 
         {/* ── RIGHT: cycling images — top on mobile, right half on desktop ── */}
         <div className="relative h-64 flex-shrink-0 overflow-hidden md:absolute md:h-auto md:top-0 md:bottom-0 md:right-0 md:left-[44%]">
@@ -174,30 +174,17 @@ export default function Home() {
         <div
           className="relative flex-1 flex items-center bg-stone-950 dark:bg-black z-10 md:absolute md:top-0 md:bottom-0 md:left-0 md:w-[52%] md:[clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]"
         >
-          {/* Halftone gold dots — far left, desktop only */}
+          {/* Halftone gold dots — fills entire dark panel, clipped by parent clip-path */}
           <div
-            className="hidden md:block absolute left-0 inset-y-0 w-28 opacity-[0.12] pointer-events-none"
+            className="hidden md:block absolute inset-0 opacity-[0.20] pointer-events-none"
             style={{
               backgroundImage: 'radial-gradient(circle, #c8861e 1.5px, transparent 1.5px)',
               backgroundSize: '13px 13px',
             }}
           />
 
-          {/* Scattered gold dots */}
-          {[
-            { top: '20%', left: '65%' }, { top: '65%', left: '60%' },
-            { top: '40%', left: '72%' }, { top: '78%', left: '68%' },
-            { top: '12%', left: '75%' },
-          ].map((pos, i) => (
-            <div
-              key={i}
-              className="hidden md:block absolute w-1 h-1 rounded-full bg-brand-400 opacity-35 pointer-events-none"
-              style={pos}
-            />
-          ))}
-
           {/* Content */}
-          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:px-10 lg:px-16 xl:px-24 max-w-lg">
+          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:px-10 lg:px-14 xl:px-20 max-w-2xl">
 
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -217,7 +204,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="font-serif font-light leading-[1.05] mb-4"
               style={{
-                fontSize: 'clamp(2.8rem, 4.5vw, 5rem)',
+                fontSize: 'clamp(5.6rem, 9vw, 10rem)',
                 background: GOLD,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -263,10 +250,21 @@ export default function Home() {
             </motion.div>
 
             <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="flex items-center gap-2 mt-10 mb-8"
+            >
+              <div className="h-px flex-1 bg-brand-400" />
+              <span className="text-brand-400 text-[10px]">✦</span>
+              <div className="h-px flex-1 bg-brand-400" />
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 1 }}
-              className="flex gap-8 mt-12 pt-8 border-t border-white/[0.07]"
+              className="flex gap-8"
             >
               {[
                 { num: '500+', label: 'Exclusive Pieces' },
@@ -284,16 +282,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Gold stripe at diagonal edge — desktop only ── */}
-        <div className="hidden md:block absolute inset-y-0 z-20 pointer-events-none" style={{ left: 'calc(52% - 55px)', width: '110px' }}>
-          <div className="absolute inset-y-0 opacity-65" style={{ left: '50%', width: '2px', background: 'linear-gradient(to bottom, transparent, #c8861e 25%, #ecc46e 50%, #c8861e 75%, transparent)', transform: 'rotate(-7deg) translateX(-50%)' }} />
-          {[10, 20, 30, 42].map((o, i) => (
-            <div key={o} className="absolute inset-y-0" style={{ left: `calc(50% + ${o}px)`, width: '1px', background: 'linear-gradient(to bottom, transparent, #c8861e 30%, #c8861e 70%, transparent)', opacity: 0.15 - i * 0.025, transform: 'rotate(-7deg)' }} />
-          ))}
-          {[20, 55, 90, 130, 170, 210, 255].map(top => (
-            <div key={top} className="absolute bg-brand-400" style={{ top, left: '28%', width: '3px', height: '11px', opacity: 0.45, transform: 'rotate(-7deg)' }} />
-          ))}
-        </div>
 
         {/* ── Slide indicators — desktop bottom-right ── */}
         <div className="hidden md:flex absolute bottom-8 right-8 z-30 flex-col items-end gap-3">

@@ -148,10 +148,10 @@ export function Navbar({ onAuthOpen }) {
               </AnimatePresence>
             </div>
           ))}
-          <Link to="/builder" className="px-3 py-2 text-sm font-body text-stone-600 dark:text-stone-300 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg">
-            {t('nav.builder')}
+          <Link to="/drops" className="px-3 py-2 text-sm font-body text-stone-600 dark:text-stone-300 hover:text-brand-500 dark:hover:text-brand-400 transition-colors rounded-lg">
+            Drops
           </Link>
-          <Link to="/shop?sort=deals" className="px-3 py-2 text-sm font-body text-red-500 hover:text-red-600 transition-colors rounded-lg font-medium">
+          <Link to="/shop?sort=deals" className="px-3 py-2 text-sm font-body text-brand-500 hover:text-brand-400 dark:text-brand-400 dark:hover:text-brand-300 transition-colors rounded-lg font-medium">
             {t('nav.sale')}
           </Link>
         </div>
@@ -288,7 +288,7 @@ export function Navbar({ onAuthOpen }) {
                   <Link to="/account" className="block px-4 py-2 text-sm font-body text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800" onClick={() => setAccountOpen(false)}>My Account</Link>
                   {isAdmin && <Link to="/admin" className="block px-4 py-2 text-sm font-body text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800" onClick={() => setAccountOpen(false)}>Admin Panel</Link>}
                   <hr className="border-stone-100 dark:border-stone-800 my-1" />
-                  <button onClick={() => { signOut(); setAccountOpen(false) }} className="w-full text-start px-4 py-2 text-sm font-body text-red-500 hover:bg-stone-50 dark:hover:bg-stone-800">Sign Out</button>
+                  <button onClick={() => { signOut(); setAccountOpen(false) }} className="w-full text-start px-4 py-2 text-sm font-body text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800">Sign Out</button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -369,14 +369,14 @@ export function Navbar({ onAuthOpen }) {
                   </AnimatePresence>
                 </div>
               ))}
-              <Link to="/builder" className="block py-2.5 text-sm font-body font-medium text-stone-700 dark:text-stone-200" onClick={() => setMobileOpen(false)}>{t('nav.builder')}</Link>
-              <Link to="/shop?sort=deals" className="block py-2.5 text-sm font-body font-medium text-red-500" onClick={() => setMobileOpen(false)}>{t('nav.sale')}</Link>
+              <Link to="/drops" className="block py-2.5 text-sm font-body font-medium text-stone-700 dark:text-stone-200" onClick={() => setMobileOpen(false)}>Drops</Link>
+              <Link to="/shop?sort=deals" className="block py-2.5 text-sm font-body font-medium text-brand-500 dark:text-brand-400" onClick={() => setMobileOpen(false)}>{t('nav.sale')}</Link>
               <hr className="border-stone-100 dark:border-stone-800 my-2" />
               {user
                 ? <>
                   <Link to="/account" className="block py-2.5 text-sm font-body text-stone-700 dark:text-stone-200" onClick={() => setMobileOpen(false)}>My Account</Link>
                   {isAdmin && <Link to="/admin" className="block py-2.5 text-sm font-body text-stone-700 dark:text-stone-200" onClick={() => setMobileOpen(false)}>Admin Panel</Link>}
-                  <button onClick={() => { signOut(); setMobileOpen(false) }} className="w-full text-start py-2.5 text-sm font-body text-red-500">Sign Out</button>
+                  <button onClick={() => { signOut(); setMobileOpen(false) }} className="w-full text-start py-2.5 text-sm font-body text-stone-500 dark:text-stone-400">Sign Out</button>
                 </>
                 : <button onClick={() => { onAuthOpen(); setMobileOpen(false) }} className="w-full text-start py-2.5 text-sm font-body text-stone-700 dark:text-stone-200">Sign In</button>
               }

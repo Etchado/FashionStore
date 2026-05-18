@@ -342,9 +342,9 @@ const accessories = [
     badges: ['BESTSELLER'],
     inStock: true,
     stockCount: 15,
-    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=600&q=80',
     images: [
-      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80',
+      'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=600&q=80',
     ],
     description: 'The iconic Monogram canvas bifold wallet. Compact yet spacious, with multiple card slots and a bill compartment.',
     variants: [
@@ -365,9 +365,9 @@ const accessories = [
     badges: ['SALE'],
     inStock: true,
     stockCount: 18,
-    image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=600&q=80',
     images: [
-      'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80',
+      'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=600&q=80',
     ],
     description: 'Prada\'s signature Saffiano leather meets a polished gold-tone triangular logo buckle. Classic refinement.',
     variants: [

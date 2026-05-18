@@ -54,7 +54,7 @@ export function ProductCard({ product, index = 0, onQuickView }) {
     >
       <Link to={`/product/${product.id}`} className="block">
         {/* Image container */}
-        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-stone-100 dark:bg-stone-800">
+        <div className="relative aspect-[3/4] overflow-hidden bg-stone-100 dark:bg-stone-900">
           <img
             src={imgError ? 'https://placehold.co/400x533/e7e5e4/78716c?text=FASHION' : product.image}
             alt={product.name}
@@ -66,37 +66,64 @@ export function ProductCard({ product, index = 0, onQuickView }) {
           {/* Badges */}
           <div className="absolute top-3 start-3 flex flex-col gap-1">
             {product.badges?.map(b => <Badge key={b} type={b} />)}
-            {discountPct && <Badge type="SALE" />}
           </div>
 
           {/* Discount pct */}
           {discountPct && (
-            <div className="absolute top-3 end-3 bg-red-500 text-white text-xs font-body font-bold px-2 py-0.5 rounded-full">
+            <div className="absolute top-3 end-3 bg-stone-900 dark:bg-white text-white dark:text-stone-900 text-[10px] font-body font-semibold uppercase tracking-wider px-2 py-0.5">
               -{discountPct}%
             </div>
           )}
 
-          {/* Hover actions */}
-          <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2 p-3">
-            <div className="flex gap-2 bg-white/90 dark:bg-stone-900/90 backdrop-blur rounded-full px-3 py-1.5 shadow-lg">
-              <button onClick={handleWishlist} title={t('product.addToWishlist')} className={cn('p-1 transition-colors', wishlisted ? 'text-red-500' : 'text-stone-500 hover:text-red-500')}>
-                <Heart size={16} fill={wishlisted ? 'currentColor' : 'none'} />
-              </button>
-              {onQuickView && (
-                <button onClick={(e) => { e.preventDefault(); onQuickView(product) }} title={t('product.quickView')} className="p-1 text-stone-500 hover:text-brand-500 transition-colors">
-                  <Eye size={16} />
-                </button>
+          {/* Side action rail — appears on hover */}
+          <div className="absolute top-3 end-3 flex flex-col gap-1.5 translate-x-8 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <button
+              onClick={handleWishlist}
+              title={t('product.addToWishlist')}
+              className={cn(
+                'w-8 h-8 flex items-center justify-center bg-white dark:bg-stone-900 shadow-sm transition-colors',
+                wishlisted ? 'text-brand-500' : 'text-stone-500 hover:text-brand-500'
               )}
-              <button onClick={handleCompare} title={t('product.compare')} className={cn('p-1 transition-colors', comparing ? 'text-brand-500' : 'text-stone-500 hover:text-brand-500')}>
-                <GitCompare size={16} />
+            >
+              <Heart size={14} fill={wishlisted ? 'currentColor' : 'none'} />
+            </button>
+            {onQuickView && (
+              <button
+                onClick={(e) => { e.preventDefault(); onQuickView(product) }}
+                title={t('product.quickView')}
+                className="w-8 h-8 flex items-center justify-center bg-white dark:bg-stone-900 text-stone-500 hover:text-brand-500 shadow-sm transition-colors"
+              >
+                <Eye size={14} />
               </button>
-            </div>
+            )}
+            <button
+              onClick={handleCompare}
+              title={t('product.compare')}
+              className={cn(
+                'w-8 h-8 flex items-center justify-center bg-white dark:bg-stone-900 shadow-sm transition-colors',
+                comparing ? 'text-brand-500' : 'text-stone-500 hover:text-brand-500'
+              )}
+            >
+              <GitCompare size={14} />
+            </button>
+          </div>
+
+          {/* Add to cart — slides up from bottom on hover */}
+          <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <button
+              onClick={handleAddToCart}
+              disabled={!product.inStock}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-stone-950 dark:bg-white text-white dark:text-stone-900 text-[10px] font-body font-semibold uppercase tracking-[0.15em] hover:bg-brand-500 dark:hover:bg-brand-400 dark:hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ShoppingBag size={13} />
+              {product.inStock ? t('product.addToCart') : t('product.outOfStock')}
+            </button>
           </div>
 
           {/* Out of stock overlay */}
           {!product.inStock && (
-            <div className="absolute inset-0 bg-white/50 dark:bg-black/50 flex items-center justify-center">
-              <span className="font-body text-sm font-semibold text-stone-700 dark:text-stone-200 bg-white dark:bg-stone-900 px-3 py-1.5 rounded-full shadow">
+            <div className="absolute inset-0 bg-white/50 dark:bg-black/60 flex items-center justify-center">
+              <span className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-stone-700 dark:text-stone-200 bg-white dark:bg-stone-900 px-4 py-2">
                 {t('product.outOfStock')}
               </span>
             </div>
@@ -104,12 +131,12 @@ export function ProductCard({ product, index = 0, onQuickView }) {
         </div>
 
         {/* Info */}
-        <div className="mt-3 space-y-1">
-          <p className="text-xs font-body text-stone-400 uppercase tracking-wider">{product.brand}</p>
+        <div className="mt-4 space-y-1">
+          <p className="text-[10px] font-body text-stone-400 uppercase tracking-[0.2em]">{product.brand}</p>
           <h3 className="font-serif text-stone-900 dark:text-stone-100 leading-snug line-clamp-2">{product.name}</h3>
-          <div className="flex items-center gap-1">
-            <Star size={12} fill="currentColor" className="text-brand-400" />
-            <span className="text-xs font-body text-stone-500">{product.rating} ({product.reviewCount})</span>
+          <div className="flex items-center gap-1 pt-0.5">
+            <Star size={11} fill="currentColor" className="text-brand-400" />
+            <span className="text-[11px] font-body text-stone-400">{product.rating} ({product.reviewCount})</span>
           </div>
           <div className="flex items-center gap-2 pt-1">
             <span className="font-body font-semibold text-stone-900 dark:text-stone-100">{format(product.price)}</span>
@@ -119,18 +146,6 @@ export function ProductCard({ product, index = 0, onQuickView }) {
           </div>
         </div>
       </Link>
-
-      {/* Add to cart */}
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        onClick={handleAddToCart}
-        disabled={!product.inStock}
-        className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 rounded-full border border-stone-200 dark:border-stone-700 text-sm font-body font-medium text-stone-700 dark:text-stone-200 hover:bg-brand-500 hover:text-white hover:border-brand-500 dark:hover:bg-brand-500 dark:hover:border-brand-500 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-      >
-        <ShoppingBag size={15} />
-        {product.inStock ? t('product.addToCart') : t('product.outOfStock')}
-      </motion.button>
     </motion.div>
   )
 }

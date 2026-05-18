@@ -19,25 +19,25 @@ export function AnnouncementBar() {
   if (dismissed) return null
 
   return (
-    <div className="bg-brand-500 text-white h-announcement flex items-center justify-center relative overflow-hidden">
+    <div className="bg-stone-950 dark:bg-black text-white h-announcement flex items-center justify-center relative overflow-hidden border-b border-stone-900">
       <AnimatePresence mode="wait">
         <motion.p
           key={idx}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
+          exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.3 }}
-          className="text-xs font-body font-medium tracking-wide text-center px-10"
+          className="text-[10px] font-body uppercase tracking-[0.25em] text-white/60 text-center px-12"
         >
           {t(`announcement.${MESSAGES[idx]}`)}
         </motion.p>
       </AnimatePresence>
       <button
         onClick={() => { setDismissed(true); sessionStorage.setItem('ann-dismissed', '1') }}
-        className="absolute end-3 text-white/70 hover:text-white transition-colors"
+        className="absolute end-4 text-white/30 hover:text-white/70 transition-colors"
         aria-label="Dismiss"
       >
-        <X size={14} />
+        <X size={12} />
       </button>
     </div>
   )

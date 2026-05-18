@@ -15,7 +15,7 @@ export function BrandsMarquee() {
           {doubled.map((brand, i) => (
             <span
               key={i}
-              className="font-serif text-xl text-stone-300 dark:text-stone-700 hover:text-brand-400 dark:hover:text-brand-500 transition-colors cursor-default select-none flex-shrink-0"
+              className="font-serif text-xl text-brand-400 dark:text-brand-500 hover:text-stone-300 dark:hover:text-stone-700 transition-colors cursor-default select-none flex-shrink-0"
             >
               {brand}
             </span>

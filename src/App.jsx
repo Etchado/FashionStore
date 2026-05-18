@@ -32,7 +32,7 @@ const Wishlist = lazy(() => import('@/pages/Wishlist'))
 const Checkout = lazy(() => import('@/pages/Checkout'))
 const Account = lazy(() => import('@/pages/Account'))
 const Admin = lazy(() => import('@/pages/Admin'))
-const Builder = lazy(() => import('@/pages/Builder'))
+const Drops = lazy(() => import('@/pages/Drops'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
 function PageLoader() {
@@ -63,7 +63,7 @@ function AnimatedRoutes({ onAuthOpen }) {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/account" element={<Account />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/builder" element={<Builder />} />
+            <Route path="/drops" element={<Drops />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
