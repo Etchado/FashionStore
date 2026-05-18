@@ -1,18 +1,31 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Clock, Zap, Star, Shield, Gem } from 'lucide-react'
 import { useProducts } from '@/context/ProductsContext'
 import { useCurrency } from '@/context/CurrencyContext'
-import { useTheme } from '@/context/ThemeContext'
 import { BrandsMarquee } from '@/components/common/BrandsMarquee'
 import { useSEO } from '@/hooks/useSEO'
 import { DROPS } from '@/data/products'
 import { cn } from '@/lib/cn'
 
-const HERO_DAY   = 'https://images.unsplash.com/photo-1747982719494-af001c94536f?w=1920&q=90'
-const HERO_NIGHT = 'https://images.unsplash.com/photo-1598634222670-87c5f558119c?w=1920&q=90'
+const SLIDES = [
+  {
+    src: 'https://images.unsplash.com/photo-1598634222670-87c5f558119c?w=1400&q=90',
+    label: 'Signature Fragrances',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1708651145401-6be804cd02d4?w=1400&q=90',
+    label: 'Iconic Timepieces',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1747982719494-af001c94536f?w=1400&q=90',
+    label: 'Curated Accessories',
+  },
+]
+
+const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
 
 function useCountdown(target) {
   const [now, setNow] = useState(Date.now())
@@ -99,8 +112,12 @@ export default function Home() {
   const { t } = useTranslation()
   const { products, loading } = useProducts()
   const { format } = useCurrency()
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const [slide, setSlide] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => setSlide(s => (s + 1) % SLIDES.length), 4500)
+    return () => clearInterval(t)
+  }, [])
 
   useSEO({
     title: 'Luxury Perfumes, Watches & Accessories',
@@ -137,105 +154,223 @@ export default function Home() {
     <div className="overflow-x-hidden">
 
       {/* ── HERO ── */}
-      <section className="relative h-screen min-h-[680px] overflow-hidden flex items-end">
+      <section className="relative h-screen min-h-[640px] overflow-hidden">
+
+        {/* Right side: auto-cycling product images */}
         <div className="absolute inset-0">
-          <motion.img
-            key={isDark ? 'night' : 'day'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2 }}
-            src={isDark ? HERO_NIGHT : HERO_DAY}
-            alt={isDark ? 'Desert at night' : 'Desert at dawn'}
-            className="w-full h-full object-cover"
-            onError={e => {
-              e.target.src = isDark
-                ? 'https://placehold.co/1920x1080/0c0a09/c8861e?text=FASHION+STORE'
-                : 'https://placehold.co/1920x1080/c8861e/1c1917?text=FASHION+STORE'
-            }}
-          />
-          <div className={cn(
-            'absolute inset-0 bg-gradient-to-t',
-            isDark
-              ? 'from-black/85 via-black/40 to-black/20'
-              : 'from-stone-950/70 via-stone-950/20 to-stone-950/5'
-          )} />
+          <AnimatePresence mode="sync">
+            <motion.img
+              key={slide}
+              src={SLIDES[slide].src}
+              alt={SLIDES[slide].label}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: 'easeInOut' }}
+              onError={e => { e.target.src = 'https://placehold.co/1400x900/1c1917/c8861e?text=FASHION' }}
+            />
+          </AnimatePresence>
+          {/* subtle right-side darkening so image doesn't bleed too bright */}
+          <div className="absolute inset-0 bg-gradient-to-l from-black/30 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-8 pb-20 md:pb-28">
-          {/* Season label */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex items-center gap-3 mb-6"
-          >
-            <div className="w-8 h-px bg-brand-400" />
-            <span className="text-[10px] font-body uppercase tracking-[0.3em] text-white/60">
-              Autumn / Winter 2025
-            </span>
-          </motion.div>
+        {/* Dark left panel with diagonal cut */}
+        <div
+          className="absolute inset-y-0 left-0 z-10 bg-stone-950 dark:bg-black flex items-center"
+          style={{ width: '56%', clipPath: 'polygon(0 0, 100% 0, 88% 100%, 0 100%)' }}
+        >
+          {/* Halftone gold dots — far left */}
+          <div
+            className="absolute left-0 inset-y-0 w-28 opacity-[0.12] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #c8861e 1.5px, transparent 1.5px)',
+              backgroundSize: '13px 13px',
+            }}
+          />
 
-          {/* Headline — regular + italic mix */}
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif font-light text-white leading-[1.05] mb-6"
-            style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)' }}
-          >
-            The Art of<br />
-            <em className="italic text-brand-300">Timeless</em><br />
-            Elegance
-          </motion.h1>
+          {/* Gold dot scatter — decorative */}
+          {[
+            { top: '22%', left: '62%' }, { top: '68%', left: '58%' },
+            { top: '38%', left: '70%' }, { top: '80%', left: '66%' },
+            { top: '14%', left: '74%' }, { top: '55%', left: '76%' },
+          ].map((pos, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-brand-400 opacity-40 pointer-events-none"
+              style={pos}
+            />
+          ))}
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45 }}
-            className="font-body text-white/60 text-base max-w-xs md:max-w-sm mb-10 leading-relaxed"
-          >
-            {t('home.hero.subtitle')}
-          </motion.p>
-
-          {/* CTA buttons — MAISON square style */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex flex-wrap items-center gap-4 mb-16"
-          >
-            <Link
-              to="/shop"
-              className="bg-white text-stone-900 px-8 py-3.5 text-[11px] font-body font-semibold uppercase tracking-[0.18em] hover:bg-brand-400 hover:text-white transition-colors duration-300"
+          {/* Content */}
+          <div className="relative z-10 px-10 md:px-16 lg:px-24 w-full max-w-xl">
+            {/* Season label */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex items-center gap-3 mb-7"
             >
-              Explore Collection
-            </Link>
-            <Link
-              to="/shop?sort=newest"
-              className="border border-white/40 text-white px-8 py-3.5 text-[11px] font-body font-semibold uppercase tracking-[0.18em] hover:border-white hover:bg-white/10 transition-colors duration-300"
-            >
-              New Arrivals
-            </Link>
-          </motion.div>
+              <div className="w-7 h-px bg-brand-400" />
+              <span className="text-[9px] font-body uppercase tracking-[0.35em] text-brand-400/70">
+                Autumn / Winter 2025
+              </span>
+            </motion.div>
 
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.75 }}
-            className="flex flex-wrap items-start gap-10 border-t border-white/15 pt-8"
-          >
-            {[
-              { num: '500+', label: 'Exclusive Pieces' },
-              { num: '50+',  label: 'Luxury Brands' },
-              { num: '2024', label: 'Est. Fashion Store' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <p className="font-serif text-2xl text-white">{stat.num}</p>
-                <p className="text-[9px] font-body uppercase tracking-[0.25em] text-white/40 mt-1">{stat.label}</p>
-              </div>
+            {/* Gold metallic headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="font-serif font-light leading-[1.05] mb-4"
+              style={{
+                fontSize: 'clamp(2.6rem, 4.5vw, 5rem)',
+                background: GOLD,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              The Art of<br />
+              <em className="italic">Timeless</em><br />
+              Elegance
+            </motion.h1>
+
+            {/* Gold ornamental divider */}
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="flex items-center gap-2 mb-6 origin-left"
+            >
+              <div className="h-px w-10 bg-brand-400" />
+              <span className="text-brand-400 text-[10px]">✦</span>
+              <div className="h-px w-10 bg-brand-400" />
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65 }}
+              className="font-body text-white/45 text-sm leading-relaxed mb-10 max-w-[260px]"
+            >
+              {t('home.hero.subtitle')}
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8 }}
+            >
+              <Link
+                to="/shop"
+                className="inline-block border border-brand-400/50 text-brand-300 px-8 py-3 text-[10px] font-body font-semibold uppercase tracking-[0.2em] hover:bg-brand-400/10 hover:border-brand-400 transition-all duration-300"
+              >
+                Explore Collection
+              </Link>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 1 }}
+              className="flex gap-8 mt-12 pt-8 border-t border-white/8"
+            >
+              {[
+                { num: '500+', label: 'Exclusive Pieces' },
+                { num: '50+',  label: 'Luxury Brands' },
+                { num: '2024', label: 'Est.' },
+              ].map(stat => (
+                <div key={stat.label}>
+                  <p
+                    className="font-serif text-xl"
+                    style={{ background: GOLD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+                  >
+                    {stat.num}
+                  </p>
+                  <p className="text-[9px] font-body uppercase tracking-wider text-white/30 mt-0.5">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Gold diagonal lines — at the panel cut */}
+        <div
+          className="absolute inset-y-0 z-20 pointer-events-none"
+          style={{ left: 'calc(56% - 70px)', width: '140px' }}
+        >
+          {/* Main gold vertical bar */}
+          <div
+            className="absolute inset-y-0 opacity-70"
+            style={{
+              left: '50%',
+              width: '2px',
+              background: 'linear-gradient(to bottom, transparent 0%, #c8861e 20%, #ecc46e 50%, #c8861e 80%, transparent 100%)',
+              transform: 'rotate(-8deg) translateX(-50%)',
+              transformOrigin: 'center',
+            }}
+          />
+          {/* Thinner parallel lines */}
+          {[10, 20, 32, 44].map((offset, i) => (
+            <div
+              key={offset}
+              className="absolute inset-y-0"
+              style={{
+                left: `calc(50% + ${offset}px)`,
+                width: '1px',
+                background: 'linear-gradient(to bottom, transparent 0%, #c8861e 30%, #c8861e 70%, transparent 100%)',
+                opacity: 0.18 - i * 0.03,
+                transform: 'rotate(-8deg)',
+                transformOrigin: 'center',
+              }}
+            />
+          ))}
+          {/* Short gold dashes (like the reference) */}
+          {[0, 30, 60, 90, 120, 150, 180].map(top => (
+            <div
+              key={top}
+              className="absolute bg-brand-400"
+              style={{
+                top: `${top}px`,
+                left: '30%',
+                width: '3px',
+                height: '12px',
+                opacity: 0.5,
+                transform: 'rotate(-8deg)',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Slide label + dots bottom-right */}
+        <div className="absolute bottom-8 right-8 z-30 flex flex-col items-end gap-3">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={slide}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+              className="text-[9px] font-body uppercase tracking-[0.25em] text-white/40"
+            >
+              {SLIDES[slide].label}
+            </motion.span>
+          </AnimatePresence>
+          <div className="flex gap-1.5">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setSlide(i)}
+                className={cn(
+                  'h-px transition-all duration-500 bg-brand-400',
+                  i === slide ? 'w-8 opacity-100' : 'w-3 opacity-30'
+                )}
+              />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
