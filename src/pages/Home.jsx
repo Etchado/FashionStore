@@ -184,7 +184,7 @@ export default function Home() {
           />
 
           {/* Content */}
-          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:pr-[18%] max-w-lg md:max-w-xl">
+          <div className="relative z-10 w-full px-8 py-12 md:py-0 max-w-sm md:max-w-md lg:max-w-lg">
 
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -204,7 +204,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="font-serif font-light leading-[1.05] mb-4"
               style={{
-                fontSize: 'clamp(2.8rem, 9vw, 10rem)',
+                fontSize: 'clamp(2.5rem, 4vw, 4.5rem)',
                 background: GOLD,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
