@@ -172,7 +172,7 @@ export default function Home() {
 
         {/* ── LEFT: solid dark panel — below on mobile, left on desktop ── */}
         <div
-          className="relative flex-1 flex items-center bg-stone-950 dark:bg-black z-10 md:absolute md:top-0 md:bottom-0 md:left-0 md:w-[52%] md:[clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]"
+          className="relative flex-1 flex items-center justify-center bg-stone-950 dark:bg-black z-10 md:absolute md:top-0 md:bottom-0 md:left-0 md:w-[52%] md:[clip-path:polygon(0_0,100%_0,88%_100%,0_100%)]"
         >
           {/* Halftone gold dots — fills entire dark panel, clipped by parent clip-path */}
           <div
@@ -184,7 +184,7 @@ export default function Home() {
           />
 
           {/* Content */}
-          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:pl-[14%] md:pr-8 lg:pl-[18%] xl:pl-[20%] max-w-2xl">
+          <div className="relative z-10 w-full px-8 py-12 md:py-0 max-w-lg md:max-w-xl">
 
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -204,7 +204,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="font-serif font-light leading-[1.05] mb-4"
               style={{
-                fontSize: 'clamp(5.6rem, 9vw, 10rem)',
+                fontSize: 'clamp(2.8rem, 9vw, 10rem)',
                 background: GOLD,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
