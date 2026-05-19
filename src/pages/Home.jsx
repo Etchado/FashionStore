@@ -124,7 +124,7 @@ export default function Home() {
       key: 'perfumes',
       label: t('nav.perfumes'),
       sub: 'Rare fragrances',
-      image: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=800&q=85',
+      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=85',
       href: '/shop?category=perfumes',
     },
     {
