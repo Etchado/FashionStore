@@ -184,7 +184,7 @@ export default function Home() {
           />
 
           {/* Content */}
-          <div className="relative z-10 w-full px-8 py-12 md:py-0 max-w-lg md:max-w-xl">
+          <div className="relative z-10 w-full px-8 py-12 md:py-0 md:pr-[18%] max-w-lg md:max-w-xl">
 
             <motion.div
               initial={{ opacity: 0, x: -16 }}
