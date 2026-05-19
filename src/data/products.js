@@ -19,9 +19,9 @@ const perfumes = [
     badges: ['BESTSELLER'],
     inStock: true,
     stockCount: 24,
-    image: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80',
     images: [
-      'https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80',
       'https://images.unsplash.com/photo-1588514912908-b5c3e3e3b16c?w=600&q=80',
     ],
     description: 'A bold, clean fragrance that defies the rules of traditional perfumery. Fresh citrus notes open into a warm, woody base.',

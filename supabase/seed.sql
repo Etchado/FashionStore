@@ -5,7 +5,7 @@ INSERT INTO public.products (id, name, brand, category, price, original_price, r
 
 -- PERFUMES
 ('p1', 'Bleu de Chanel', 'Chanel', 'perfumes', 185, 220, 4.8, 312, '{"BESTSELLER"}', true, 24,
-  'https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=80',
+  'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80',
   'A bold, clean fragrance that defies the rules of traditional perfumery.',
   'Top: Grapefruit, Lemon | Heart: Ginger, Nutmeg | Base: Sandalwood, Cedarwood',
   '{"Concentration":"EDP","Gender":"Men","Season":"All-Year","Longevity":"8–10 hrs"}', 'CH-BDC-001'),
