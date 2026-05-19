@@ -204,7 +204,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="font-serif font-light leading-[1.05] mb-4"
               style={{
-                fontSize: 'clamp(2.5rem, 4vw, 4.5rem)',
+                fontSize: 'clamp(2.5rem, 6vw, 6.5rem)',
                 background: GOLD,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
