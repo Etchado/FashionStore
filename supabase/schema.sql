@@ -187,3 +187,63 @@ create table if not exists public.loyalty_history (
 );
 alter table public.loyalty_history enable row level security;
 create policy "Users read own loyalty history" on public.loyalty_history for select using (auth.uid() = user_id);
+create policy "Users insert own loyalty history" on public.loyalty_history for insert with check (auth.uid() = user_id);
+
+-- ─── atomic loyalty increment ─────────────────────────────────────────────────
+-- Avoids the read-modify-write race condition in the client.
+create or replace function public.increment_loyalty_points(p_user_id uuid, p_points int, p_reason text)
+returns void language plpgsql security definer as $$
+begin
+  insert into public.loyalty_points (user_id, points, updated_at)
+  values (p_user_id, p_points, now())
+  on conflict (user_id)
+  do update set points = loyalty_points.points + excluded.points,
+                updated_at = now();
+
+  insert into public.loyalty_history (user_id, points, reason)
+  values (p_user_id, p_points, p_reason);
+end;
+$$;
+
+-- ─── transactional order placement ───────────────────────────────────────────
+-- Inserts order + line items + loyalty in a single transaction.
+-- Returns the new order row.
+create or replace function public.place_order(
+  p_user_id      uuid,
+  p_order_number text,
+  p_total        numeric,
+  p_shipping     jsonb,
+  p_items        jsonb   -- array of {product_id, name, variant_label, price, qty}
+)
+returns public.orders language plpgsql security definer as $$
+declare
+  v_order public.orders;
+  v_pts   int;
+begin
+  -- Insert order
+  insert into public.orders (user_id, order_number, status, total, shipping_info)
+  values (p_user_id, p_order_number, 'paid', p_total, p_shipping)
+  returning * into v_order;
+
+  -- Insert line items
+  insert into public.order_items (order_id, product_id, name, variant_label, price, qty)
+  select
+    v_order.id,
+    (item ->> 'product_id'),
+    (item ->> 'name'),
+    (item ->> 'variant_label'),
+    (item ->> 'price')::numeric,
+    (item ->> 'qty')::int
+  from jsonb_array_elements(p_items) as item;
+
+  -- Award loyalty points (1 pt per $10, only for authenticated users)
+  if p_user_id is not null then
+    v_pts := floor(p_total / 10);
+    if v_pts > 0 then
+      perform public.increment_loyalty_points(p_user_id, v_pts, 'Order ' || p_order_number);
+    end if;
+  end if;
+
+  return v_order;
+end;
+$$;

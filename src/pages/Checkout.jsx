@@ -12,7 +12,11 @@ import { supabase } from '@/lib/supabase'
 import { useSEO } from '@/hooks/useSEO'
 import { cn } from '@/lib/cn'
 
-const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
+import { GOLD } from '@/lib/constants'
+
+function generateOrderNumber() {
+  return `AU-${crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()}`
+}
 
 const shippingSchema = z.object({
   firstName: z.string().min(1, 'Required'),
@@ -85,38 +89,26 @@ export default function Checkout() {
   const placeOrder = async () => {
     setLoading(true)
     try {
-      const num = `AU-${Date.now().toString().slice(-6)}`
-      const { data: order, error } = await supabase.from('orders').insert({
-        user_id: user?.id,
-        order_number: num,
-        status: 'paid',
-        total,
-        shipping_info: shipping,
-      }).select().single()
+      const num = generateOrderNumber()
+      const lineItems = items.map(i => ({
+        product_id: i.productId,
+        name: i.name,
+        variant_label: i.variantLabel || null,
+        price: i.price,
+        qty: i.qty,
+      }))
+
+      const { data: order, error } = await supabase.rpc('place_order', {
+        p_user_id:      user?.id ?? null,
+        p_order_number: num,
+        p_total:        total,
+        p_shipping:     shipping,
+        p_items:        lineItems,
+      })
 
       if (error) throw error
 
-      if (order) {
-        const lineItems = items.map(i => ({
-          order_id: order.id,
-          product_id: i.productId,
-          name: i.name,
-          variant_label: i.variantLabel,
-          price: i.price,
-          qty: i.qty,
-        }))
-        await supabase.from('order_items').insert(lineItems)
-
-        if (user) {
-          const pts = Math.floor(total / 10)
-          const { data: existing } = await supabase.from('loyalty_points').select('points').eq('user_id', user.id).single()
-          const newTotal = (existing?.points || 0) + pts
-          await supabase.from('loyalty_points').upsert({ user_id: user.id, points: newTotal, updated_at: new Date().toISOString() }, { onConflict: 'user_id' })
-          await supabase.from('loyalty_history').insert({ user_id: user.id, points: pts, reason: `Order ${num}` })
-        }
-      }
-
-      setOrderNumber(num)
+      setOrderNumber(order.order_number)
       clearCart()
       setStep(3)
     } catch {

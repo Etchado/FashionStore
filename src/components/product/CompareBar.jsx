@@ -5,7 +5,7 @@ import { X, GitCompare } from 'lucide-react'
 import { useCompare } from '@/context/CompareContext'
 import { useCurrency } from '@/context/CurrencyContext'
 
-const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
+import { GOLD } from '@/lib/constants'
 
 export function CompareBar() {
   const { t } = useTranslation()

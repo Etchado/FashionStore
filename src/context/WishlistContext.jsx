@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from './AuthContext'
 
@@ -40,10 +40,14 @@ export function WishlistProvider({ children }) {
     return !has
   }, [user, ids])
 
-  const isWishlisted = (id) => ids.includes(id)
+  const isWishlisted = useCallback((id) => ids.includes(id), [ids])
+  const value = useMemo(
+    () => ({ ids, toggle, isWishlisted, count: ids.length }),
+    [ids, toggle, isWishlisted]
+  )
 
   return (
-    <WishlistContext.Provider value={{ ids, toggle, isWishlisted, count: ids.length }}>
+    <WishlistContext.Provider value={value}>
       {children}
     </WishlistContext.Provider>
   )

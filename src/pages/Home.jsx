@@ -18,7 +18,7 @@ const SLIDES = [
   { src: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=90', label: 'Designer Bags' },
 ]
 
-const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
+import { GOLD } from '@/lib/constants'
 
 function useCountdown(target) {
   const [now, setNow] = useState(Date.now())

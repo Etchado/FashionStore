@@ -35,6 +35,7 @@ const Admin = lazy(() => import('@/pages/Admin'))
 const Drops = lazy(() => import('@/pages/Drops'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 const Support = lazy(() => import('@/pages/Support'))
+const Builder = lazy(() => import('@/pages/Builder'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -75,6 +76,7 @@ function AnimatedRoutes({ onAuthOpen }) {
             <Route path="/admin" element={<Admin />} />
             <Route path="/drops" element={<Drops />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/builder" element={<Builder />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

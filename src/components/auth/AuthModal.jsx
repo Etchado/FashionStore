@@ -7,7 +7,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useToast } from '@/context/ToastContext'
 import { cn } from '@/lib/cn'
 
-const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
+import { GOLD } from '@/lib/constants'
 
 const signInSchema = z.object({
   email: z.string().min(1, 'emailRequired').email('emailInvalid'),
