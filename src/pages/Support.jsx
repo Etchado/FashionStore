@@ -164,7 +164,7 @@ export default function Support() {
   useEffect(() => {
     if (hash) {
       const el = document.getElementById(hash.replace('#', ''))
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300)
     }
   }, [hash])
 
