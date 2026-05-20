@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'motion/react'
@@ -52,6 +52,14 @@ export default function Shop() {
     priceMax: null,
     inStock: false,
   })
+
+  useEffect(() => {
+    setFilters(prev => ({
+      ...prev,
+      categories: category ? [category] : [],
+      brands: brand ? [brand] : [],
+    }))
+  }, [category, brand])
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters)

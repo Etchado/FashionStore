@@ -69,9 +69,9 @@ export function Footer() {
             <ul className="space-y-3">
               {['faq', 'shipping', 'returns', 'contact', 'track'].map(key => (
                 <li key={key}>
-                  <a href="#" className="text-sm font-body text-stone-500 hover:text-brand-400 transition-colors">
+                  <Link to={`/support#${key}`} className="text-sm font-body text-stone-500 hover:text-brand-400 transition-colors">
                     {t(`footer.support.${key}`)}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

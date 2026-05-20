@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react'
+import { Suspense, lazy, useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 
@@ -34,6 +34,13 @@ const Account = lazy(() => import('@/pages/Account'))
 const Admin = lazy(() => import('@/pages/Admin'))
 const Drops = lazy(() => import('@/pages/Drops'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
+const Support = lazy(() => import('@/pages/Support'))
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 function PageLoader() {
   return (
@@ -64,6 +71,7 @@ function AnimatedRoutes({ onAuthOpen }) {
             <Route path="/account" element={<Account />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/drops" element={<Drops />} />
+            <Route path="/support" element={<Support />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
@@ -77,6 +85,7 @@ function Shell() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <ScrollProgressBar />
       <AnnouncementBar />
       <Navbar onAuthOpen={() => setAuthOpen(true)} />
