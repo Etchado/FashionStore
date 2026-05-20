@@ -65,14 +65,18 @@ export default function Checkout() {
   // Handle return from Stripe Checkout
   useEffect(() => {
     const sessionId = searchParams.get('session_id')
-    if (!sessionId || items.length === 0) return
+    if (!sessionId) return
+    // Clean the URL immediately so refresh doesn't re-trigger
+    window.history.replaceState({}, '', '/checkout')
     const verify = async () => {
       setLoading(true)
       try {
+        const cartItems = items.length > 0 ? items : JSON.parse(localStorage.getItem('cart') || '[]')
+        if (!cartItems.length) throw new Error('Cart empty')
         const res = await fetch('/api/verify-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, items, shipping, userId: user?.id ?? null }),
+          body: JSON.stringify({ sessionId, items: cartItems, shipping, userId: user?.id ?? null }),
         })
         const json = await res.json()
         if (json.error) throw new Error(json.error)
@@ -86,7 +90,7 @@ export default function Checkout() {
       }
     }
     verify()
-  }, [searchParams])
+  }, [])
 
   const shippingTotal = subtotal >= 150 ? 0 : 15
   const total = subtotal + shippingTotal

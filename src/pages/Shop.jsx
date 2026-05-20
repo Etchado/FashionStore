@@ -106,6 +106,14 @@ export default function Shop() {
   const meta = category ? CATEGORY_META[category] : null
   const hasActiveFilters = filters.categories.length || filters.brands.length || filters.priceMin || filters.priceMax || filters.inStock
   const currentSort = SORT_OPTIONS.find(o => o.value === sort)
+  const PAGE_SIZE = 12
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+
+  // Reset pagination when filters/sort change
+  useEffect(() => { setVisibleCount(PAGE_SIZE) }, [filters, sort])
+
+  const visibleProducts = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount])
+  const hasMore = visibleCount < filtered.length
 
   return (
     <div>
@@ -294,7 +302,20 @@ export default function Shop() {
 
         {/* Grid */}
         <div className="flex-1 min-w-0">
-          <ProductGrid products={filtered} loading={loading} onClearFilters={clearFilters} viewMode={viewMode} />
+          <ProductGrid products={visibleProducts} loading={loading} onClearFilters={clearFilters} viewMode={viewMode} />
+          {hasMore && (
+            <div className="flex flex-col items-center gap-3 mt-12">
+              <p className="text-[10px] font-body uppercase tracking-[0.2em] text-stone-400">
+                Showing {visibleCount} of {filtered.length}
+              </p>
+              <button
+                onClick={() => setVisibleCount(n => n + PAGE_SIZE)}
+                className="px-10 py-3.5 border border-stone-300 dark:border-stone-700 text-[10px] font-body font-semibold uppercase tracking-[0.2em] text-stone-600 dark:text-stone-300 hover:border-brand-500 hover:text-brand-500 dark:hover:border-brand-400 dark:hover:text-brand-400 transition-colors"
+              >
+                Load More
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

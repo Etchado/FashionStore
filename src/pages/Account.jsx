@@ -8,7 +8,7 @@ import { useCurrency } from '@/context/CurrencyContext'
 import { useSEO } from '@/hooks/useSEO'
 import { cn } from '@/lib/cn'
 
-import { GOLD } from '@/lib/constants'
+import { GOLD, LOYALTY_TIERS } from '@/lib/constants'
 
 const STATUS_STYLE = {
   pending:    'border-stone-300 text-stone-500',
@@ -18,13 +18,6 @@ const STATUS_STYLE = {
   delivered:  'border-stone-900 dark:border-white text-stone-900 dark:text-white',
   cancelled:  'border-stone-300 text-stone-400 line-through',
 }
-
-const TIER_THRESHOLDS = [
-  { name: 'Bronze',   min: 0     },
-  { name: 'Silver',   min: 1000  },
-  { name: 'Gold',     min: 5000  },
-  { name: 'Platinum', min: 10000 },
-]
 
 export default function Account() {
   const { t } = useTranslation()
@@ -53,9 +46,9 @@ export default function Account() {
   if (!user) return <Navigate to="/" replace />
 
   const points = loyalty?.points || 0
-  const tierIndex = TIER_THRESHOLDS.reduce((idx, t, i) => points >= t.min ? i : idx, 0)
-  const tier = TIER_THRESHOLDS[tierIndex]
-  const nextTier = TIER_THRESHOLDS[tierIndex + 1]
+  const tierIndex = LOYALTY_TIERS.reduce((idx, t, i) => points >= t.min ? i : idx, 0)
+  const tier = LOYALTY_TIERS[tierIndex]
+  const nextTier = LOYALTY_TIERS[tierIndex + 1]
   const tierProgress = nextTier
     ? Math.min(((points - tier.min) / (nextTier.min - tier.min)) * 100, 100)
     : 100
@@ -196,7 +189,7 @@ export default function Account() {
 
               {/* Tier breakdown */}
               <div className="grid grid-cols-4 gap-4 border-t border-stone-100 dark:border-stone-800 pt-8">
-                {TIER_THRESHOLDS.map((t2) => (
+                {LOYALTY_TIERS.map((t2) => (
                   <div key={t2.name} className="text-center">
                     <p className={cn(
                       'text-[10px] font-body font-semibold uppercase tracking-wider mb-1',
