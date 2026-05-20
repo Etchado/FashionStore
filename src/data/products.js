@@ -19,10 +19,10 @@ const perfumes = [
     badges: ['BESTSELLER'],
     inStock: true,
     stockCount: 24,
-    image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80',
-      'https://images.unsplash.com/photo-1588514912908-b5c3e3e3b16c?w=600&q=80',
+      'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&q=80&auto=format&auto=format',
+      'https://images.unsplash.com/photo-1588514912908-b5c3e3e3b16c?w=800&q=80&auto=format&auto=format',
     ],
     description: 'A bold, clean fragrance that defies the rules of traditional perfumery. Fresh citrus notes open into a warm, woody base.',
     notes: 'Top: Grapefruit, Lemon | Heart: Ginger, Nutmeg | Base: Sandalwood, Cedarwood',
@@ -46,9 +46,9 @@ const perfumes = [
     badges: ['NEW'],
     inStock: true,
     stockCount: 18,
-    image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&q=80',
+      'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80&auto=format&auto=format',
     ],
     description: 'A sparkling floral fragrance that captures the joy of femininity. Peony and rose intertwine with a delicate pink pepper accent.',
     notes: 'Top: Pink Pepper | Heart: Peony, Rose | Base: White Musk',
@@ -71,9 +71,9 @@ const perfumes = [
     badges: ['EXCLUSIVE'],
     inStock: true,
     stockCount: 7,
-    image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80',
+      'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Rare oud wood is blended with sandalwood, Chinese pepper, and cardamom for a sophisticated and exotic fragrance.',
     notes: 'Top: Chinese Pepper, Cardamom | Heart: Oud Wood | Base: Sandalwood, Vetiver, Amber',
@@ -96,9 +96,9 @@ const perfumes = [
     badges: ['BESTSELLER', 'EXCLUSIVE'],
     inStock: true,
     stockCount: 12,
-    image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&q=80',
+      'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Inspired by the life of Napoleon Bonaparte — strength, power, and success. A complex, fruity-chypre fragrance.',
     notes: 'Top: Pineapple, Bergamot | Heart: Jasmine, Rose | Base: Oak Moss, Musk, Ambergris',
@@ -120,9 +120,9 @@ const perfumes = [
     badges: ['SALE'],
     inStock: true,
     stockCount: 20,
-    image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80',
+      'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Transporting you to a late-night jazz club. Warm notes of rum, tobacco leaf, and musk create an intimate atmosphere.',
     notes: 'Top: Pink Pepper, Neroli | Heart: Tobacco Leaf, Rum | Base: Vetiver, Musk',
@@ -144,9 +144,9 @@ const perfumes = [
     badges: ['BESTSELLER'],
     inStock: false,
     stockCount: 0,
-    image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80&auto=format&auto=format',
     ],
     description: 'An intense and elegant fragrance for the modern man. Cardamom, cedar, and vetiver create a sensual evening scent.',
     notes: 'Top: Cardamom, Bergamot | Heart: Cedar | Base: Vetiver, Coumarin',
@@ -171,10 +171,10 @@ const watches = [
     badges: ['EXCLUSIVE', 'BESTSELLER'],
     inStock: true,
     stockCount: 3,
-    image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=600&q=80',
-      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&q=80',
+      'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80&auto=format&auto=format',
+      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80&auto=format&auto=format',
     ],
     description: 'The benchmark of dive watches. The Submariner Date features a unidirectional rotatable bezel and is water-resistant to 300m.',
     variants: [
@@ -196,9 +196,9 @@ const watches = [
     badges: ['SALE'],
     inStock: true,
     stockCount: 8,
-    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&q=80',
+      'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Favoured by James Bond. The iconic diver with a co-axial movement, Master Chronometer certified.',
     variants: [
@@ -220,9 +220,9 @@ const watches = [
     badges: ['NEW'],
     inStock: true,
     stockCount: 11,
-    image: 'https://images.unsplash.com/photo-1617617877206-bcdb7990ef2d?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1617617877206-bcdb7990ef2d?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1617617877206-bcdb7990ef2d?w=600&q=80',
+      'https://images.unsplash.com/photo-1617617877206-bcdb7990ef2d?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Born on the racetrack. The Carrera Chronograph blends motorsport heritage with modern watchmaking precision.',
     variants: [
@@ -244,9 +244,9 @@ const watches = [
     badges: ['EXCLUSIVE'],
     inStock: true,
     stockCount: 5,
-    image: 'https://images.unsplash.com/photo-1773414686135-cffd9fbe3590?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1773414686135-cffd9fbe3590?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1773414686135-cffd9fbe3590?w=600&q=80',
+      'https://images.unsplash.com/photo-1773414686135-cffd9fbe3590?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Iconic square case, exposed screws, and interchangeable straps. The Santos is where aviation history meets haute horlogerie.',
     variants: [
@@ -268,9 +268,9 @@ const watches = [
     badges: ['SALE', 'EXCLUSIVE'],
     inStock: true,
     stockCount: 4,
-    image: 'https://images.unsplash.com/photo-1509941943102-10c232535736?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1509941943102-10c232535736?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1509941943102-10c232535736?w=600&q=80',
+      'https://images.unsplash.com/photo-1509941943102-10c232535736?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Elegant proportions, a clean white dial, and the finest Swiss movement. A timeless classic from Schaffhausen.',
     variants: [
@@ -294,9 +294,9 @@ const accessories = [
     badges: ['BESTSELLER'],
     inStock: true,
     stockCount: 22,
-    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80',
+      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Oversized square frames with the iconic GG logo at the temples. Italian craftsmanship meets modern glamour.',
     variants: [
@@ -318,9 +318,9 @@ const accessories = [
     badges: ['EXCLUSIVE'],
     inStock: true,
     stockCount: 9,
-    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80',
+      'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80&auto=format&auto=format',
     ],
     description: 'The Clic H bracelet features the iconic H clasp in gold-plated metal with calfskin leather. Minimalist luxury.',
     variants: [
@@ -342,9 +342,9 @@ const accessories = [
     badges: ['BESTSELLER'],
     inStock: true,
     stockCount: 15,
-    image: 'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=600&q=80',
+      'https://images.unsplash.com/photo-1531190260877-c8d11eb5afaf?w=800&q=80&auto=format&auto=format',
     ],
     description: 'The iconic Monogram canvas bifold wallet. Compact yet spacious, with multiple card slots and a bill compartment.',
     variants: [
@@ -365,9 +365,9 @@ const accessories = [
     badges: ['SALE'],
     inStock: true,
     stockCount: 18,
-    image: 'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=600&q=80',
+      'https://images.unsplash.com/photo-1684510334550-0c4fa8aaffd1?w=800&q=80&auto=format&auto=format',
     ],
     description: 'Prada\'s signature Saffiano leather meets a polished gold-tone triangular logo buckle. Classic refinement.',
     variants: [
@@ -390,9 +390,9 @@ const accessories = [
     badges: ['NEW'],
     inStock: true,
     stockCount: 13,
-    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80&auto=format&auto=format',
     images: [
-      'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=80',
+      'https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80&auto=format&auto=format',
     ],
     description: 'The Intrecciato weave, Bottega Veneta\'s signature craft, rendered in butter-soft nappa leather. Minimalist perfection.',
     variants: [
@@ -411,7 +411,7 @@ export const DROPS = [
     id: 'd1',
     name: 'Limited Oud Noir Collection',
     brand: 'Tom Ford',
-    image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80&auto=format',
     price: 520,
     totalUnits: 100,
     claimedUnits: 73,
@@ -423,7 +423,7 @@ export const DROPS = [
     id: 'd2',
     name: 'Explorer II Glacier',
     brand: 'Rolex',
-    image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80&auto=format',
     price: 15800,
     totalUnits: 25,
     claimedUnits: 0,
@@ -435,7 +435,7 @@ export const DROPS = [
     id: 'd3',
     name: 'Signature Silk Scarf Set',
     brand: 'Hermès',
-    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80&auto=format',
     price: 890,
     totalUnits: 50,
     claimedUnits: 50,

@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'motion/react'
 import { z } from 'zod'
-import { Check, ShoppingBag, Truck, CreditCard } from 'lucide-react'
+import { Check, ShoppingBag, Truck, CreditCard, Lock } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
 import { useCurrency } from '@/context/CurrencyContext'
@@ -11,12 +11,9 @@ import { useToast } from '@/context/ToastContext'
 import { supabase } from '@/lib/supabase'
 import { useSEO } from '@/hooks/useSEO'
 import { cn } from '@/lib/cn'
-
 import { GOLD } from '@/lib/constants'
 
-function generateOrderNumber() {
-  return `AU-${crypto.randomUUID().replace(/-/g, '').slice(0, 8).toUpperCase()}`
-}
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 
 const shippingSchema = z.object({
   firstName: z.string().min(1, 'Required'),
@@ -58,6 +55,7 @@ export default function Checkout() {
 
   useSEO({ title: t('checkout.title') })
 
+  const [searchParams] = useSearchParams()
   const [step, setStep] = useState(0)
   const [shipping, setShipping] = useState({
     firstName: '', lastName: '', email: user?.email || '',
@@ -66,6 +64,32 @@ export default function Checkout() {
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [orderNumber, setOrderNumber] = useState(null)
+
+  // Handle return from Stripe Checkout
+  useEffect(() => {
+    const sessionId = searchParams.get('session_id')
+    if (!sessionId || items.length === 0) return
+    const verify = async () => {
+      setLoading(true)
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/verify-checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_SUPABASE_ANON_KEY },
+          body: JSON.stringify({ sessionId, items, shipping, userId: user?.id ?? null }),
+        })
+        const json = await res.json()
+        if (json.error) throw new Error(json.error)
+        setOrderNumber(json.orderNumber)
+        clearCart()
+        setStep(3)
+      } catch {
+        addToast(t('toast.error'), 'error')
+      } finally {
+        setLoading(false)
+      }
+    }
+    verify()
+  }, [searchParams])
 
   const shippingTotal = subtotal >= 150 ? 0 : 15
   const total = subtotal + shippingTotal
@@ -86,34 +110,19 @@ export default function Checkout() {
     return true
   }
 
-  const placeOrder = async () => {
+  const redirectToStripe = async () => {
     setLoading(true)
     try {
-      const num = generateOrderNumber()
-      const lineItems = items.map(i => ({
-        product_id: i.productId,
-        name: i.name,
-        variant_label: i.variantLabel || null,
-        price: i.price,
-        qty: i.qty,
-      }))
-
-      const { data: order, error } = await supabase.rpc('place_order', {
-        p_user_id:      user?.id ?? null,
-        p_order_number: num,
-        p_total:        total,
-        p_shipping:     shipping,
-        p_items:        lineItems,
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_SUPABASE_ANON_KEY },
+        body: JSON.stringify({ items, shippingTotal }),
       })
-
-      if (error) throw error
-
-      setOrderNumber(order.order_number)
-      clearCart()
-      setStep(3)
+      const { url, error } = await res.json()
+      if (error || !url) throw new Error(error || 'No checkout URL')
+      window.location.href = url
     } catch {
       addToast(t('toast.error'), 'error')
-    } finally {
       setLoading(false)
     }
   }
@@ -307,15 +316,17 @@ export default function Checkout() {
             {step === 2 && (
               <motion.div key="payment" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.2 }}>
                 <p className="text-[10px] font-body font-semibold uppercase tracking-[0.25em] text-stone-400 mb-6">{t('checkout.payment.title')}</p>
-                <div className="border border-brand-400/30 bg-brand-50/30 dark:bg-stone-900 p-4 mb-6">
-                  <p className="text-sm font-body text-stone-600 dark:text-stone-300">{t('checkout.payment.note')}</p>
-                </div>
-                <div className="space-y-4 mb-8">
-                  {[['Card Number', '4242 4242 4242 4242'], ['Expiry', '12/28'], ['CVV', '···']].map(([lbl, ph]) => (
-                    <Field key={lbl} label={lbl}>
-                      <input placeholder={ph} readOnly className="w-full text-sm font-body bg-transparent border border-stone-200 dark:border-stone-700 px-4 py-3 outline-none text-stone-400 cursor-not-allowed" />
-                    </Field>
-                  ))}
+                <div className="border border-stone-200 dark:border-stone-800 p-8 mb-8 flex flex-col items-center text-center gap-5">
+                  <Lock size={28} className="text-brand-400" />
+                  <div>
+                    <p className="font-serif text-lg font-light text-stone-900 dark:text-stone-100 mb-1">Secure Payment</p>
+                    <p className="text-sm font-body text-stone-400 max-w-xs">
+                      You will be redirected to Stripe's secure checkout. Your payment details are never stored on our servers.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 text-[10px] font-body uppercase tracking-[0.15em] text-stone-400">
+                    <span>Visa</span><span>·</span><span>Mastercard</span><span>·</span><span>Amex</span>
+                  </div>
                 </div>
                 <div className="flex gap-3">
                   <button
@@ -325,11 +336,12 @@ export default function Checkout() {
                     ← Back
                   </button>
                   <button
-                    onClick={placeOrder}
+                    onClick={redirectToStripe}
                     disabled={loading}
-                    className="px-8 py-3.5 bg-stone-950 dark:bg-white text-white dark:text-stone-900 text-[10px] font-body font-semibold uppercase tracking-[0.2em] hover:bg-brand-500 dark:hover:bg-brand-400 dark:hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="flex-1 px-8 py-3.5 bg-stone-950 dark:bg-white text-white dark:text-stone-900 text-[10px] font-body font-semibold uppercase tracking-[0.2em] hover:bg-brand-500 dark:hover:bg-brand-400 dark:hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    {loading ? t('common.loading') : t('checkout.payment.placeOrder')}
+                    <Lock size={11} />
+                    {loading ? t('common.loading') : 'Pay Securely with Stripe'}
                   </button>
                 </div>
               </motion.div>

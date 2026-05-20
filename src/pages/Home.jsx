@@ -11,11 +11,11 @@ import { DROPS } from '@/data/products'
 import { cn } from '@/lib/cn'
 
 const SLIDES = [
-  { src: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1400&q=90', label: 'Signature Fragrances' },
-  { src: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1400&q=90', label: 'Iconic Timepieces' },
-  { src: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=1400&q=90', label: 'Luxury Eyewear' },
-  { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1400&q=90', label: 'Fine Jewellery' },
-  { src: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=90', label: 'Designer Bags' },
+  { src: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1400&q=85&auto=format', label: 'Signature Fragrances' },
+  { src: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1400&q=85&auto=format', label: 'Iconic Timepieces' },
+  { src: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=1400&q=85&auto=format', label: 'Luxury Eyewear' },
+  { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1400&q=85&auto=format', label: 'Fine Jewellery' },
+  { src: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=85&auto=format', label: 'Designer Bags' },
 ]
 
 import { GOLD } from '@/lib/constants'

@@ -20,9 +20,9 @@ const SORT_OPTIONS = [
 ]
 
 const CATEGORY_META = {
-  perfumes:    { title: 'Fragrances', sub: 'Rare & Signature Scents', img: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1400&q=80' },
-  watches:     { title: 'Timepieces', sub: 'Iconic Swiss & Luxury Watches', img: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1400&q=80' },
-  accessories: { title: 'Accessories', sub: 'Artisan Crafted Luxury', img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=80' },
+  perfumes:    { title: 'Fragrances', sub: 'Rare & Signature Scents', img: 'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=1400&q=80&auto=format' },
+  watches:     { title: 'Timepieces', sub: 'Iconic Swiss & Luxury Watches', img: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1400&q=80&auto=format' },
+  accessories: { title: 'Accessories', sub: 'Artisan Crafted Luxury', img: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1400&q=80&auto=format' },
 }
 
 import { GOLD } from '@/lib/constants'

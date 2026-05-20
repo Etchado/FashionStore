@@ -36,6 +36,8 @@ export default function Admin() {
   const [expanded, setExpanded] = useState(null)
   const [page, setPage] = useState(0)
   const [total, setTotal] = useState(0)
+  const [allTimeRevenue, setAllTimeRevenue] = useState(0)
+  const [allTimeDelivered, setAllTimeDelivered] = useState(0)
 
   useEffect(() => {
     if (!isAdmin) return
@@ -51,10 +53,25 @@ export default function Admin() {
     fetchOrders()
   }, [isAdmin, page])
 
+  useEffect(() => {
+    if (!isAdmin) return
+    const fetchStats = async () => {
+      const { data } = await supabase
+        .from('orders')
+        .select('total, status')
+      if (data) {
+        setAllTimeRevenue(data.reduce((s, o) => s + (o.total || 0), 0))
+        setAllTimeDelivered(data.filter(o => o.status === 'delivered').length)
+      }
+    }
+    fetchStats()
+  }, [isAdmin])
+
   const updateStatus = async (orderId, status) => {
     const { error } = await supabase.from('orders').update({ status }).eq('id', orderId)
     if (!error) {
       setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o))
+      if (status === 'delivered') setAllTimeDelivered(n => n + 1)
       addToast(`Order updated to ${status}`)
     } else {
       addToast(t('toast.error'), 'error')
@@ -63,9 +80,6 @@ export default function Admin() {
 
   if (loading) return null
   if (!user || !isAdmin) return <Navigate to="/" replace />
-
-  const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0)
-  const deliveredCount = orders.filter(o => o.status === 'delivered').length
 
   return (
     <div>
@@ -83,8 +97,8 @@ export default function Admin() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
             { label: 'Total Orders', value: total.toString() },
-            { label: 'Delivered', value: deliveredCount.toString() },
-            { label: 'This Page Revenue', value: format(totalRevenue) },
+            { label: 'Delivered', value: allTimeDelivered.toString() },
+            { label: 'Total Revenue', value: format(allTimeRevenue) },
             { label: 'Pending', value: orders.filter(o => o.status === 'pending').length.toString() },
           ].map(({ label, value }) => (
             <div key={label} className="border border-stone-200 dark:border-stone-800 p-5">
