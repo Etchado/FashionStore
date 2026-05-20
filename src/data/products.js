@@ -220,9 +220,9 @@ const watches = [
     badges: ['NEW'],
     inStock: true,
     stockCount: 11,
-    image: 'https://images.unsplash.com/photo-1625614494268-814e3f6cc530?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1614926857083-7be149266cda?w=600&q=80',
     images: [
-      'https://images.unsplash.com/photo-1625614494268-814e3f6cc530?w=600&q=80',
+      'https://images.unsplash.com/photo-1614926857083-7be149266cda?w=600&q=80',
     ],
     description: 'Born on the racetrack. The Carrera Chronograph blends motorsport heritage with modern watchmaking precision.',
     variants: [
@@ -244,9 +244,9 @@ const watches = [
     badges: ['EXCLUSIVE'],
     inStock: true,
     stockCount: 5,
-    image: 'https://images.unsplash.com/photo-1611048267451-e6ed903d4a38?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80',
     images: [
-      'https://images.unsplash.com/photo-1611048267451-e6ed903d4a38?w=600&q=80',
+      'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80',
     ],
     description: 'Iconic square case, exposed screws, and interchangeable straps. The Santos is where aviation history meets haute horlogerie.',
     variants: [

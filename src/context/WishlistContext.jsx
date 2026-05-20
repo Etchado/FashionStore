@@ -31,21 +31,14 @@ export function WishlistProvider({ children }) {
   }, [user])
 
   const toggle = useCallback(async (productId) => {
-    let added = false
-    setIds(prev => {
-      const has = prev.includes(productId)
-      added = !has
-      return has ? prev.filter(id => id !== productId) : [...prev, productId]
-    })
+    const has = ids.includes(productId)
+    setIds(has ? ids.filter(id => id !== productId) : [...ids, productId])
     if (user) {
-      if (added) {
-        await supabase.from('wishlists').upsert({ user_id: user.id, product_id: productId })
-      } else {
-        await supabase.from('wishlists').delete().eq('user_id', user.id).eq('product_id', productId)
-      }
+      if (!has) await supabase.from('wishlists').upsert({ user_id: user.id, product_id: productId })
+      else await supabase.from('wishlists').delete().eq('user_id', user.id).eq('product_id', productId)
     }
-    return added
-  }, [user])
+    return !has
+  }, [user, ids])
 
   const isWishlisted = (id) => ids.includes(id)
 

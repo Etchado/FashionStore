@@ -1,17 +1,17 @@
 import { useTranslation } from 'react-i18next'
-import { Heart } from 'lucide-react'
+import { Heart, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useWishlist } from '@/context/WishlistContext'
 import { useProducts } from '@/context/ProductsContext'
-import { ProductGrid } from '@/components/product/ProductGrid'
+import { ProductCard } from '@/components/product/ProductCard'
 import { useSEO } from '@/hooks/useSEO'
 
 const GOLD = 'linear-gradient(135deg, #ecc46e 0%, #c8861e 35%, #f4dca8 55%, #a86a14 80%, #ecc46e 100%)'
 
 export default function Wishlist() {
   const { t } = useTranslation()
-  const { ids } = useWishlist()
+  const { ids, toggle } = useWishlist()
   const { products } = useProducts()
 
   useSEO({ title: t('wishlist.title') })
@@ -66,7 +66,20 @@ export default function Wishlist() {
             </Link>
           </motion.div>
         ) : (
-          <ProductGrid products={wishlisted} loading={false} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
+            {wishlisted.map((p, i) => (
+              <div key={p.id} className="flex flex-col">
+                <ProductCard product={p} index={i} />
+                <button
+                  onClick={() => toggle(p.id)}
+                  className="mt-3 flex items-center justify-center gap-1.5 w-full py-2 border border-stone-200 dark:border-stone-800 text-[10px] font-body uppercase tracking-[0.15em] text-stone-400 hover:border-brand-500 hover:text-brand-500 dark:hover:border-brand-400 dark:hover:text-brand-400 transition-colors"
+                >
+                  <X size={10} />
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
