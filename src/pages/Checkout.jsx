@@ -8,12 +8,9 @@ import { useCart } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
 import { useCurrency } from '@/context/CurrencyContext'
 import { useToast } from '@/context/ToastContext'
-import { supabase } from '@/lib/supabase'
 import { useSEO } from '@/hooks/useSEO'
 import { cn } from '@/lib/cn'
 import { GOLD } from '@/lib/constants'
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 
 const shippingSchema = z.object({
   firstName: z.string().min(1, 'Required'),
@@ -72,9 +69,9 @@ export default function Checkout() {
     const verify = async () => {
       setLoading(true)
       try {
-        const res = await fetch(`${SUPABASE_URL}/functions/v1/verify-checkout`, {
+        const res = await fetch('/api/verify-checkout', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_SUPABASE_ANON_KEY },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, items, shipping, userId: user?.id ?? null }),
         })
         const json = await res.json()
@@ -113,9 +110,9 @@ export default function Checkout() {
   const redirectToStripe = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-checkout`, {
+      const res = await fetch('/api/create-checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_SUPABASE_ANON_KEY },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items, shippingTotal }),
       })
       const { url, error } = await res.json()
